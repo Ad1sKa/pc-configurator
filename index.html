@@ -5,122 +5,124 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Конфигуратор ПК под бюджет: Беларусь, Россия, Казахстан</title>
 <meta name="description" content="Подберите совместимую сборку ПК под свой бюджет в BYN, RUB, KZT или USD: цены, ожидаемый FPS и поиск деталей в местных магазинах.">
-<meta name="theme-color" content="#09090b">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23fafafa%22/><rect x=%228%22 y=%228%22 width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%2309090b%22/></svg>">
+<meta name="theme-color" content="#121215">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%238b5cf6%22/><rect x=%228%22 y=%228%22 width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%23121215%22/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#09090b;--p1:#0f0f12;--p2:#18181b;--ln:#27272a;--ln2:#3f3f46;--tx:#fafafa;--t2:#d4d4d8;--mu:#a1a1aa;--dm:#71717a;--ac:#818cf8;--ok:#4ade80;--wn:#facc15;--bd:#f87171;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+:root{--bg:#121215;--p1:#1c1c21;--p2:#27272e;--ln:#32323b;--ln2:#4a4a56;--tx:#ffffff;--t2:#e6e6ec;--mu:#b6b6c2;--dm:#8f8f9e;--ac:#8b5cf6;--ac2:#a78bfa;--acg:rgba(139,92,246,.5);--ok:#4ade80;--wn:#facc15;--bd:#f87171;--mono:'Fira Code',ui-monospace,SFMono-Regular,Menlo,monospace}
 *,*::before,*::after{box-sizing:border-box}
 body,h1,h2,h3,p,ul{margin:0}ul{padding:0;list-style:none}
 button,input,select{font:inherit;color:inherit}button{cursor:pointer}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{background:var(--bg);color:var(--t2);font:14px/1.5 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{background:radial-gradient(820px 380px at 50% 0,rgba(139,92,246,.16),transparent 70%) no-repeat,var(--bg);color:var(--t2);font:14px/1.5 'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{color:inherit}
-::selection{background:var(--ac);color:#09090b}
+::selection{background:var(--ac);color:#fff}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 
 /* Шапка */
-.hdr{position:sticky;top:0;z-index:40;background:rgba(9,9,11,.92);border-bottom:1px solid var(--ln);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hdr{position:sticky;top:0;z-index:40;background:rgba(18,18,21,.88);border-bottom:1px solid var(--ln);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .hdr__in{display:flex;align-items:center;gap:24px;height:56px}
 .brand{display:flex;align-items:center;gap:9px;font:500 15px var(--mono);letter-spacing:-.02em;color:var(--tx);text-decoration:none}
-.brand i{display:block;width:16px;height:16px;border-radius:4px;background:var(--tx);position:relative}
+.brand i{display:block;width:16px;height:16px;border-radius:4px;background:var(--ac);box-shadow:0 0 14px var(--acg);position:relative}
 .brand i::after{content:"";position:absolute;inset:4px;border-radius:1px;background:var(--bg)}
 .nav{display:flex;gap:2px;margin-right:auto}
-.nav a{padding:6px 10px;border-radius:6px;font-size:13px;color:var(--mu);text-decoration:none;transition:color .15s,background .15s}
+.nav a{padding:6px 10px;border-radius:6px;font-size:13px;font-weight:500;color:var(--mu);text-decoration:none;transition:color .15s,background .15s}
 .nav a:hover{color:var(--tx);background:var(--p2)}
 .rg{display:flex;align-items:center;gap:8px;font:11px var(--mono);letter-spacing:.06em;color:var(--dm);text-transform:uppercase}
-.sel{appearance:none;-webkit-appearance:none;padding:6px 28px 6px 10px;border:1px solid var(--ln2);border-radius:6px;background:var(--p1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%2371717a' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>") no-repeat right 10px center;font-size:13px;color:var(--tx);cursor:pointer;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif}
-.sel:hover{border-color:var(--dm)}
+.sel{appearance:none;-webkit-appearance:none;padding:6px 28px 6px 10px;border:1px solid var(--ln2);border-radius:6px;background:var(--p1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%238f8f9e' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>") no-repeat right 10px center;font-size:13px;color:var(--tx);cursor:pointer;text-transform:none;letter-spacing:0;font-family:'Manrope',sans-serif}
+.sel:hover{border-color:var(--ac)}
 
 /* Заголовок страницы */
 .ph{padding:36px 0 26px}
-.ph h1{font:600 28px/1.2 'Inter',sans-serif;letter-spacing:-.025em;color:var(--tx)}
+.ph h1{font:700 30px/1.2 'Manrope',sans-serif;letter-spacing:-.03em;color:var(--tx)}
 .ph p{margin-top:8px;max-width:640px;color:var(--mu)}
+#loadErr{padding-top:20px}
+.wr code{padding:1px 6px;border-radius:4px;background:rgba(255,255,255,.08);font:12px var(--mono);color:#fff}
 
 /* Каркас */
 .layout{display:grid;grid-template-columns:288px minmax(0,1fr);gap:24px;align-items:start;padding-bottom:56px}
 .col{display:flex;flex-direction:column;gap:16px;min-width:0}
-.side{position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto;border:1px solid var(--ln);border-radius:10px;background:var(--p1)}
+.side{position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto;border:1px solid var(--ln);border-radius:12px;background:var(--p1);box-shadow:0 10px 36px -14px rgba(0,0,0,.6)}
 .fs{padding:16px;border-top:1px solid var(--ln)}
 .fs:first-child{border-top:0}
 .fs__t{margin-bottom:12px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
 .big{font:500 26px/1.1 var(--mono);color:var(--tx);letter-spacing:-.02em}
 .hint{margin-top:4px;font:11px var(--mono);color:var(--dm)}
-.range{-webkit-appearance:none;appearance:none;display:block;width:100%;height:4px;margin:16px 0 8px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(90deg,var(--tx) var(--pct,0%),var(--ln2) var(--pct,0%))}
-.range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--tx);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--tx)}
-.range::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--tx);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--tx)}
+.range{-webkit-appearance:none;appearance:none;display:block;width:100%;height:4px;margin:16px 0 8px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(90deg,var(--ac) var(--pct,0%),var(--ln2) var(--pct,0%))}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--ac);box-shadow:0 0 0 4px rgba(139,92,246,.22),0 0 14px var(--acg)}
+.range::-moz-range-thumb{width:8px;height:8px;border-radius:50%;background:#fff;border:3px solid var(--ac);box-shadow:0 0 0 4px rgba(139,92,246,.22),0 0 14px var(--acg)}
 .rng{display:flex;justify-content:space-between;font:11px var(--mono);color:var(--dm)}
 .ps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}
-.ps button{padding:7px 9px;border:1px solid var(--ln);border-radius:6px;background:transparent;color:var(--t2);text-align:left;font-size:12px;transition:border-color .15s,background .15s}
-.ps button b{display:block;font-weight:500}
+.ps button{padding:7px 9px;border:1px solid var(--ln);border-radius:8px;background:transparent;color:var(--t2);text-align:left;font-size:12px;transition:border-color .15s,background .15s}
+.ps button b{display:block;font-weight:600}
 .ps button span{font:11px var(--mono);color:var(--dm)}
 .ps button:hover{border-color:var(--ln2);background:var(--p2)}
-.ps button[aria-pressed=true]{border-color:var(--tx);background:var(--p2)}
-.rd{display:flex;gap:10px;width:100%;padding:8px 6px;border:0;border-radius:6px;background:transparent;text-align:left;transition:background .15s}
+.ps button[aria-pressed=true]{border-color:var(--ac);background:rgba(139,92,246,.14)}
+.rd{display:flex;gap:10px;width:100%;padding:8px 6px;border:0;border-radius:8px;background:transparent;text-align:left;transition:background .15s}
 .rd:hover{background:var(--p2)}
 .rd i{flex:none;width:14px;height:14px;margin-top:3px;border-radius:50%;border:1px solid var(--ln2)}
-.rd[aria-pressed=true] i{background:var(--tx);border-color:var(--tx);box-shadow:inset 0 0 0 3px var(--bg)}
-.rd b{display:block;font-weight:500;color:var(--tx);font-size:13px}
+.rd[aria-pressed=true] i{background:var(--ac);border-color:var(--ac);box-shadow:inset 0 0 0 3px var(--p1),0 0 10px var(--acg)}
+.rd b{display:block;font-weight:600;color:var(--tx);font-size:13px}
 .rd span{font-size:12px;color:var(--dm)}
-.sg{display:flex;border:1px solid var(--ln);border-radius:6px;overflow:hidden}
-.sg button{flex:1;padding:6px 4px;border:0;border-right:1px solid var(--ln);background:transparent;color:var(--mu);font-size:12px}
+.sg{display:flex;border:1px solid var(--ln);border-radius:8px;overflow:hidden}
+.sg button{flex:1;padding:6px 4px;border:0;border-right:1px solid var(--ln);background:transparent;color:var(--mu);font-size:12px;font-weight:500}
 .sg button:last-child{border-right:0}
 .sg button:hover{color:var(--tx)}
-.sg button[aria-pressed=true]{background:var(--p2);color:var(--tx)}
+.sg button[aria-pressed=true]{background:rgba(139,92,246,.22);color:#fff}
 .lab{display:block;margin:0 0 6px;font-size:12px;color:var(--mu)}
 .lab+.sg{margin-bottom:14px}
 .sg:last-child{margin-bottom:0}
 .tg{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.tg b{display:block;font-weight:500;color:var(--tx);font-size:13px}
+.tg b{display:block;font-weight:600;color:var(--tx);font-size:13px}
 .tg p{margin-top:2px;font-size:12px;color:var(--dm)}
-.sw{position:relative;flex:none;width:34px;height:20px;border:0;border-radius:99px;background:var(--ln2);transition:background .2s}
-.sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--tx);transition:transform .2s,background .2s}
-.sw[aria-checked=true]{background:var(--tx)}
-.sw[aria-checked=true]::after{transform:translateX(14px);background:var(--bg)}
+.sw{position:relative;flex:none;width:34px;height:20px;border:0;border-radius:99px;background:var(--ln2);transition:background .2s,box-shadow .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw[aria-checked=true]{background:var(--ac);box-shadow:0 0 14px var(--acg)}
+.sw[aria-checked=true]::after{transform:translateX(14px)}
 #usedHint{margin-top:8px;font:11px var(--mono);color:var(--ok)}
 
 /* Панели */
-.pn{border:1px solid var(--ln);border-radius:10px;background:var(--p1);overflow:hidden}
+.pn{border:1px solid var(--ln);border-radius:12px;background:var(--p1);overflow:hidden;box-shadow:0 10px 36px -14px rgba(0,0,0,.6)}
 .pn__h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--ln)}
-.pn__h h2{font:600 14px 'Inter',sans-serif;color:var(--tx)}
+.pn__h h2{font:700 14px 'Manrope',sans-serif;color:var(--tx)}
 .pn__h .sub{display:block;margin-top:2px;font:11px var(--mono);color:var(--dm)}
 .pn__b{padding:16px}
 .sm{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
 .k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
 .v{margin-top:4px;font:500 32px/1.1 var(--mono);letter-spacing:-.03em;color:var(--tx)}
 .v2{margin-top:4px;font:500 18px/1.2 var(--mono);text-align:right}
-.pg{height:4px;margin-top:16px;border-radius:2px;background:var(--p2);overflow:hidden}
-.pg i{display:block;height:100%;background:var(--tx);transition:width .5s cubic-bezier(.22,.8,.24,1)}
+.pg{height:5px;margin-top:16px;border-radius:3px;background:var(--p2);overflow:hidden}
+.pg i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--ac),var(--ac2));box-shadow:0 0 12px var(--acg);transition:width .5s cubic-bezier(.22,.8,.24,1)}
 .cps{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.cp{display:inline-flex;align-items:center;padding:2px 8px;border:1px solid var(--ln);border-radius:5px;font:11px var(--mono);color:var(--mu)}
-.wr{margin-bottom:14px;padding:10px 12px;border:1px solid rgba(248,113,113,.4);border-radius:8px;background:rgba(248,113,113,.06);font-size:13px;color:#fca5a5}
+.cp{display:inline-flex;align-items:center;padding:2px 8px;border:1px solid var(--ln2);border-radius:5px;font:11px var(--mono);color:var(--mu)}
+.wr{margin-bottom:14px;padding:10px 12px;border:1px solid rgba(248,113,113,.45);border-radius:8px;background:rgba(248,113,113,.08);font-size:13px;color:#fecaca}
 .note{padding:12px 16px;border-top:1px solid var(--ln);font-size:12px;color:var(--dm)}
 
 /* Таблица */
 .tr{display:grid;grid-template-columns:56px minmax(0,1fr) 120px minmax(200px,auto);gap:16px;align-items:center;padding:14px 16px;border-top:1px solid var(--ln);transition:background .15s}
 .tr.th{padding:8px 16px;background:var(--bg);font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
-.tr:not(.th):hover{background:rgba(255,255,255,.02)}
+.tr:not(.th):hover{background:rgba(139,92,246,.05)}
 .tr .r{text-align:right}
-.tag{display:inline-block;padding:2px 0;width:44px;border:1px solid var(--ln);border-radius:4px;text-align:center;font:500 10px var(--mono);letter-spacing:.04em;color:var(--mu)}
-.nm b{font-weight:500;color:var(--tx)}
+.tag{display:inline-block;padding:2px 0;width:44px;border:1px solid var(--ln2);border-radius:4px;text-align:center;font:500 10px var(--mono);letter-spacing:.04em;color:var(--mu)}
+.nm b{font-weight:600;color:var(--tx)}
 .nm p{margin-top:2px;font-size:13px;color:var(--dm)}
-.ub{display:inline-block;margin-left:8px;padding:0 6px;border:1px solid rgba(250,204,21,.35);border-radius:4px;font:500 10px/16px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--wn);vertical-align:1px}
+.ub{display:inline-block;margin-left:8px;padding:0 6px;border:1px solid rgba(250,204,21,.4);border-radius:4px;font:500 10px/16px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--wn);vertical-align:1px}
 .pr{text-align:right;font:500 15px var(--mono);color:var(--tx);letter-spacing:-.01em}
 .pr small{font:400 12px var(--mono);color:var(--dm)}
 .ac{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px 12px}
 .ac .mr{flex-basis:100%;text-align:right;font-size:11px;color:var(--dm)}
 .ac .mr a{margin-left:8px}
-.b{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid var(--ln2);border-radius:6px;background:transparent;font-size:12px;font-weight:500;color:var(--tx);text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
-.b:hover{background:var(--p2);border-color:var(--dm)}
+.b{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid var(--ln2);border-radius:8px;background:transparent;font-size:12px;font-weight:600;color:var(--tx);text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,box-shadow .15s}
+.b:hover{background:var(--p2);border-color:var(--ac);box-shadow:0 0 14px -4px var(--acg)}
 .b em{font-style:normal;color:var(--dm);font-weight:400}
-.b--p{border-color:var(--tx);background:var(--tx);color:#09090b}
-.b--p:hover{background:#e4e4e7;border-color:#e4e4e7}
+.b--p{border-color:var(--ac);background:linear-gradient(135deg,var(--ac),#7c3aed);color:#fff;box-shadow:0 0 0 1px rgba(139,92,246,.35),0 4px 18px -2px var(--acg)}
+.b--p:hover{background:linear-gradient(135deg,var(--ac2),var(--ac));border-color:var(--ac2);box-shadow:0 0 0 1px rgba(167,139,250,.5),0 6px 26px -2px var(--acg)}
 .lk{font-size:12px;color:var(--mu);text-decoration:none;border-bottom:1px dotted var(--ln2)}
-.lk:hover{color:var(--tx);border-color:var(--mu)}
+.lk:hover{color:var(--ac2);border-color:var(--ac2)}
 
 /* FPS */
 .fp{display:grid;grid-template-columns:160px minmax(0,1fr) 96px;gap:16px;align-items:center;padding:12px 16px;border-top:1px solid var(--ln)}
@@ -134,16 +136,16 @@ a{color:inherit}
 /* Чек-лист */
 details>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;list-style:none;cursor:pointer}
 details>summary::-webkit-details-marker{display:none}
-details>summary b{display:block;font-weight:600;color:var(--tx)}
+details>summary b{display:block;font-weight:700;color:var(--tx)}
 details>summary span{font-size:12px;color:var(--dm)}
-details>summary::after{content:"+";font:400 20px/1 var(--mono);color:var(--dm)}
+details>summary::after{content:"+";font:400 20px/1 var(--mono);color:var(--ac2)}
 details[open]>summary::after{content:"\2212"}
 details[open]>summary{border-bottom:1px solid var(--ln)}
 .chl{padding:8px}
-.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:6px;cursor:pointer}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:8px;cursor:pointer}
 .chk:hover{background:var(--p2)}
-.chk input{flex:none;width:16px;height:16px;margin-top:3px;accent-color:#818cf8}
-.chk .t{display:block;font-weight:500;color:var(--tx)}
+.chk input{flex:none;width:16px;height:16px;margin-top:3px;accent-color:#8b5cf6}
+.chk .t{display:block;font-weight:600;color:var(--tx)}
 .chk .t small{margin-left:6px;font:11px var(--mono);color:var(--dm);font-weight:400}
 .chk p{margin-top:2px;font-size:13px;color:var(--dm)}
 .chk:has(input:checked) .t{text-decoration:line-through;color:var(--dm)}
@@ -151,33 +153,34 @@ details[open]>summary{border-bottom:1px solid var(--ln)}
 /* Каталог */
 .cat{padding-bottom:64px}
 .cat__h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
-.cat__h h2{font:600 20px 'Inter',sans-serif;letter-spacing:-.02em;color:var(--tx)}
+.cat__h h2{font:700 20px 'Manrope',sans-serif;letter-spacing:-.02em;color:var(--tx)}
 .cat__h p{margin-top:4px;color:var(--mu)}
 .ctl{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-bottom:1px solid var(--ln)}
-.inp{flex:1 1 260px;min-width:0;padding:8px 12px;border:1px solid var(--ln2);border-radius:6px;background:var(--bg);font-size:13px;color:var(--tx)}
+.inp{flex:1 1 260px;min-width:0;padding:8px 12px;border:1px solid var(--ln2);border-radius:8px;background:var(--bg);font-size:13px;color:var(--tx)}
 .inp::placeholder{color:var(--dm)}
 .inp:hover{border-color:var(--dm)}
+.inp:focus{border-color:var(--ac);outline:none;box-shadow:0 0 0 3px rgba(139,92,246,.2)}
 .chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;border-bottom:1px solid var(--ln)}
-.chips button{padding:4px 10px;border:1px solid var(--ln);border-radius:99px;background:transparent;font-size:12px;color:var(--mu);transition:all .15s}
-.chips button:hover{color:var(--tx);border-color:var(--ln2)}
-.chips button[aria-pressed=true]{background:var(--tx);border-color:var(--tx);color:#09090b}
+.chips button{padding:4px 10px;border:1px solid var(--ln2);border-radius:99px;background:transparent;font-size:12px;font-weight:500;color:var(--mu);transition:all .15s}
+.chips button:hover{color:var(--tx);border-color:var(--ac)}
+.chips button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff;box-shadow:0 0 14px -2px var(--acg)}
 .cnt{padding:8px 16px;font:11px var(--mono);color:var(--dm);border-bottom:1px solid var(--ln)}
 .empty{padding:36px 16px;text-align:center;color:var(--dm)}
 .more{display:flex;justify-content:center;padding:14px;border-top:1px solid var(--ln)}
 
 /* Модалка и тост */
-.md{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
+.md{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(8,8,11,.78)}
 .md.open{display:flex}
-.md__c{width:100%;max-width:420px;padding:24px;border:1px solid var(--ln2);border-radius:12px;background:var(--p1);box-shadow:0 30px 80px rgba(0,0,0,.6)}
-.md__c h2{font:600 18px 'Inter',sans-serif;color:var(--tx)}
+.md__c{width:100%;max-width:420px;padding:24px;border:1px solid var(--ln2);border-radius:14px;background:var(--p1);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(139,92,246,.18),0 0 60px -20px var(--acg)}
+.md__c h2{font:700 18px 'Manrope',sans-serif;color:var(--tx)}
 .md__c p{margin-top:6px;font-size:13px;color:var(--mu)}
 .opts{display:grid;gap:8px;margin-top:20px}
-.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--ln);border-radius:8px;background:transparent;text-align:left;transition:border-color .15s,background .15s}
-.opt:hover,.opt:focus-visible{border-color:var(--tx);background:var(--p2)}
-.opt b{font-weight:500;color:var(--tx)}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--ln);border-radius:10px;background:transparent;text-align:left;transition:border-color .15s,background .15s,box-shadow .15s}
+.opt:hover,.opt:focus-visible{border-color:var(--ac);background:rgba(139,92,246,.1);box-shadow:0 0 18px -6px var(--acg)}
+.opt b{font-weight:600;color:var(--tx)}
 .opt span{font:12px var(--mono);color:var(--dm)}
 .opt.rec::after{content:"рекомендуем";font:10px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ok);margin-left:auto;order:2}
-#toast{position:fixed;left:50%;bottom:24px;z-index:70;padding:10px 16px;border-radius:8px;background:var(--tx);color:#09090b;font-size:13px;font-weight:500;opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .25s,transform .25s}
+#toast{position:fixed;left:50%;bottom:24px;z-index:70;padding:10px 16px;border-radius:10px;background:var(--ac);color:#fff;font-size:13px;font-weight:600;box-shadow:0 8px 28px -6px var(--acg);opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .25s,transform .25s}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 .ftr{padding:28px 0 40px;border-top:1px solid var(--ln);font:11px var(--mono);color:var(--dm)}
 
@@ -209,6 +212,7 @@ details[open]>summary{border-bottom:1px solid var(--ln)}
     <label class="rg"><span>Регион</span><select id="regionSel" class="sel" aria-label="Выбор страны"></select></label>
   </div>
 </header>
+<div id="loadErr" class="wrap" hidden></div>
 
 <main class="wrap" id="build">
   <div class="ph">
@@ -314,11 +318,32 @@ details[open]>summary{border-bottom:1px solid var(--ln)}
 <div id="toast" role="status"></div>
 
 <script>
+let DB=null;
 (()=>{
 'use strict';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const enc=encodeURIComponent;
+
+/* ---------- Загрузка базы комплектующих ---------- */
+let CPU,BOARD,RAM,GPU,SSD,PSU,CASE,COOL;
+const DB_KEYS=['cpu','board','ram','gpu','ssd','psu','case','cool'];
+async function loadDB(){
+  try{
+    const res=await fetch('./data.json',{cache:'no-cache'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    DB=await res.json();
+    DB_KEYS.forEach(k=>{if(!Array.isArray(DB[k])||!DB[k].length)throw new Error('в data.json нет раздела «'+k+'»')});
+  }catch(e){
+    const el=$('#loadErr');
+    el.hidden=false;
+    el.innerHTML=`<div class="wr">Не удалось загрузить <code>data.json</code> (${esc(e.message)}). ${location.protocol==='file:'?'Страница открыта как файл, а браузер блокирует fetch для file://. Запустите локальный сервер, например <code>python -m http.server</code>, или откройте сайт через GitHub Pages / Vercel.':'Проверьте, что data.json лежит рядом с index.html и содержит корректный JSON.'}</div>`;
+    return;
+  }
+  ({cpu:CPU,board:BOARD,ram:RAM,gpu:GPU,ssd:SSD,psu:PSU,case:CASE,cool:COOL}=DB);
+  buildCatalog();
+  init();
+}
 
 /* ---------- Регионы и магазины ---------- */
 const REG={
@@ -340,118 +365,8 @@ const SHOP={
       more:[{name:'Google Shopping',url:q=>`https://www.google.com/search?tbm=shop&q=${enc(q)}`},{name:'AliExpress',url:q=>`https://www.aliexpress.com/wholesale?SearchText=${enc(q)}`}]}
 };
 
-/* ---------- База комплектующих (цены в USD, адаптированы под реалии СНГ) ---------- */
-const CPU=[
- {n:'AMD Ryzen 5 4500',b:'AMD',s:'AM4',u:70,g:80,p:80,w:65,t:1,box:1,y:'6 ядер Zen 2 с кулером: самый дешёвый способ получить нормальный игровой процессор.'},
- {n:'AMD Ryzen 5 5500',b:'AMD',s:'AM4',u:95,g:92,p:92,w:65,t:1,box:1,y:'6 ядер Zen 3 с кулером в комплекте: недорогая основа для игрового ПК.'},
- {n:'AMD Ryzen 5 5600',b:'AMD',s:'AM4',u:125,g:100,p:100,w:76,t:1,box:1,y:'Народный игровой процессор: 6 ядер и 32 МБ кэша по цене бюджетной модели.'},
- {n:'AMD Ryzen 5 5600G',b:'AMD',s:'AM4',u:120,g:95,p:97,w:76,t:1,box:1,ig:1,y:'Встроенная графика Vega 7: ПК работает сразу, видеокарту можно докупить позже.'},
- {n:'AMD Ryzen 7 5700X',b:'AMD',s:'AM4',u:170,g:104,p:135,w:90,t:1,y:'8 ядер Zen 3: запас для монтажа, стримов и многозадачности на проверенной платформе.'},
- {n:'AMD Ryzen 9 5900X',b:'AMD',s:'AM4',u:240,g:108,p:205,w:105,t:2,y:'12 ядер на AM4: рендер и монтаж без смены платформы.'},
- {n:'AMD Ryzen 7 5800X3D',b:'AMD',s:'AM4',u:320,g:135,p:140,w:105,t:2,y:'96 МБ кэша 3D V-Cache: лидер игр на AM4 без смены платформы.'},
- {n:'Intel Core i3-12100F',b:'Intel',s:'1700',u:105,g:98,p:70,w:80,t:1,box:1,y:'4 быстрых ядра и кулер в комплекте: лучший игровой минимум на LGA1700.'},
- {n:'Intel Core i5-12400F',b:'Intel',s:'1700',u:145,g:102,p:105,w:117,t:1,box:1,y:'6 производительных ядер и возможность апгрейда на i7/i9 позже.'},
- {n:'Intel Core i5-13400F',b:'Intel',s:'1700',u:210,g:108,p:150,w:150,t:2,box:1,y:'10 ядер (6P + 4E): хорош и в играх, и в рендере за разумные деньги.'},
- {n:'Intel Core i5-14400F',b:'Intel',s:'1700',u:225,g:110,p:155,w:148,t:2,box:1,y:'10 ядер и кулер в комплекте: чуть быстрее 13400F при близкой цене.'},
- {n:'Intel Core i7-12700F',b:'Intel',s:'1700',u:280,g:116,p:215,w:180,t:2,box:1,y:'12 ядер с кулером: сильный многопоток за умеренные деньги.'},
- {n:'Intel Core i5-14600KF',b:'Intel',s:'1700',u:300,g:125,p:215,w:181,t:2,y:'14 ядер и высокие частоты: быстрый игровой процессор с запасом на разгон.'},
- {n:'Intel Core i7-14700F',b:'Intel',s:'1700',u:380,g:130,p:260,w:200,t:2,y:'20 ядер: уверенный выбор для монтажа и 3D, в играх запас на годы.'},
- {n:'Intel Core i9-14900F',b:'Intel',s:'1700',u:550,g:140,p:330,w:219,t:2,y:'24 ядра: максимум многопотока на LGA1700 для тяжёлых рабочих задач.'},
- {n:'AMD Ryzen 5 7500F',b:'AMD',s:'AM5',u:180,g:122,p:120,w:88,t:1,y:'Zen 4 на новой платформе AM5: быстрее 5600 и открытый путь к апгрейду.'},
- {n:'AMD Ryzen 5 8400F',b:'AMD',s:'AM5',u:185,g:112,p:112,w:88,t:1,box:1,y:'6 ядер Zen 4 с кулером: недорогой вход на AM5.'},
- {n:'AMD Ryzen 5 7600',b:'AMD',s:'AM5',u:220,g:124,p:122,w:88,t:1,box:1,y:'6 ядер Zen 4, кулер в комплекте и встроенная графика на всякий случай.'},
- {n:'AMD Ryzen 7 7700',b:'AMD',s:'AM5',u:280,g:130,p:170,w:88,t:1,y:'8 ядер Zen 4 при скромном нагреве: универсал для игр и работы.'},
- {n:'AMD Ryzen 5 9600X',b:'AMD',s:'AM5',u:280,g:132,p:130,w:88,t:1,y:'Zen 5: свежая архитектура и высокая частота при низком нагреве.'},
- {n:'AMD Ryzen 9 7900',b:'AMD',s:'AM5',u:410,g:132,p:250,w:120,t:2,y:'12 ядер Zen 4: максимум скорости рендера и экспорта на AM5.'},
- {n:'AMD Ryzen 7 9700X',b:'AMD',s:'AM5',u:380,g:138,p:178,w:88,t:1,y:'8 ядер Zen 5: быстрый и холодный универсал для игр и работы.'},
- {n:'AMD Ryzen 7 7800X3D',b:'AMD',s:'AM5',u:450,g:165,p:175,w:120,t:2,y:'3D V-Cache даёт максимум FPS в играх среди процессоров своего класса.'},
- {n:'AMD Ryzen 9 9900X',b:'AMD',s:'AM5',u:480,g:140,p:260,w:120,t:2,y:'12 ядер Zen 5: быстрый рендер и стримы без компромиссов.'},
- {n:'AMD Ryzen 7 9800X3D',b:'AMD',s:'AM5',u:580,g:185,p:180,w:120,t:2,y:'Лучший игровой процессор: Zen 5 и 3D V-Cache в одном чипе.'}
-];
-const BOARD=[
- {n:'Gigabyte A520M S2H',s:'AM4',m:'DDR4',u:65,t:1,y:'Самая доступная плата под AM4: всё нужное для Ryzen 5000 без переплат.'},
- {n:'MSI B550M PRO-VDH WiFi',s:'AM4',m:'DDR4',u:100,t:2,y:'Усиленное питание, PCIe 4.0 и Wi-Fi: потянет Ryzen 7 и 5800X3D.'},
- {n:'ASUS TUF GAMING B550-PLUS WIFI II',s:'AM4',m:'DDR4',u:165,t:2,f:'ATX',y:'Мощное питание и два слота M.2: надёжная основа для Ryzen 9 5900X.'},
- {n:'ASRock H610M-HDV/M.2',s:'1700',m:'DDR4',u:75,t:1,y:'Бюджетная LGA1700 с недорогой DDR4: хватит для i3/i5 без разгона.'},
- {n:'MSI PRO B760M-P DDR4',s:'1700',m:'DDR4',u:120,t:2,y:'Надёжное питание под i5 13-го поколения и недорогая память DDR4.'},
- {n:'Gigabyte B760M GAMING X DDR4',s:'1700',m:'DDR4',u:145,t:2,y:'Усиленное питание и радиаторы: уверенно держит i7 на DDR4.'},
- {n:'ASUS PRIME B760M-A WIFI',s:'1700',m:'DDR5',u:175,t:2,y:'Современная плата с DDR5 и Wi-Fi: выдержит i7-14700F.'},
- {n:'MSI MAG B760M MORTAR WIFI',s:'1700',m:'DDR5',u:220,t:2,y:'Мощное питание и хорошее охлаждение VRM под i7 и i9.'},
- {n:'Gigabyte A620M S2H',s:'AM5',m:'DDR5',u:100,t:1,y:'Входной билет на AM5: DDR5 и путь к апгрейду на будущие Ryzen.'},
- {n:'MSI PRO B650M-P',s:'AM5',m:'DDR5',u:155,t:2,y:'Мощное питание и запас слотов: выдержит Ryzen 7/9 и процессоры X3D.'},
- {n:'Gigabyte B650 GAMING X AX V2',s:'AM5',m:'DDR5',u:200,t:2,f:'ATX',y:'ATX с Wi-Fi и PCIe 5.0 под M.2: комфортный выбор для X3D и Ryzen 9.'},
- {n:'ASUS TUF GAMING B650-PLUS WIFI',s:'AM5',m:'DDR5',u:250,t:2,f:'ATX',y:'Прочная плата с богатым питанием и Wi-Fi 6: надёжна на годы.'}
-];
-const RAM=[
- {n:'Kingston Fury Beast 16 ГБ (2×8) DDR4-3200',m:'DDR4',gb:16,u:35,y:'Двухканальный комплект: для игр и повседневных задач хватает с запасом.'},
- {n:'Kingston Fury Beast 32 ГБ (2×16) DDR4-3200',m:'DDR4',gb:32,u:65,y:'32 ГБ: комфортно для монтажа, десятков вкладок и тяжёлых игр.'},
- {n:'Kingston Fury Beast 64 ГБ (2×32) DDR4-3200',m:'DDR4',gb:64,u:130,y:'64 ГБ DDR4 для тяжёлых проектов на платформах без DDR5.'},
- {n:'Kingston Fury Beast 16 ГБ (2×8) DDR5-5600',m:'DDR5',gb:16,u:55,y:'Быстрая DDR5 в двухканале: достаточно для современных игр.'},
- {n:'Kingston Fury Beast 32 ГБ (2×16) DDR5-6000',m:'DDR5',gb:32,u:100,y:'Оптимум для AM5: 32 ГБ на 6000 МТ/с для игр и работы.'},
- {n:'Kingston Fury Beast 64 ГБ (2×32) DDR5-6000',m:'DDR5',gb:64,u:190,y:'64 ГБ для тяжёлых 3D-сцен, монтажа 4K и виртуальных машин.'}
-];
+/* ---------- Встроенная графика (остаётся в коде) ---------- */
 const NOGPU={id:'igpu',n:'Встроенная графика Radeon Vega 7',u:0,gs:15,v:2,w:0,y:'Видеокарта не нужна: графику даёт процессор. Дискретную можно докупить позже.'};
-const GPU=[
- {n:'Radeon RX 6500 XT 4 ГБ',b:'AMD',u:145,gs:62,v:4,w:110,y:'Самая доступная новая карта для лёгких игр и киберспорта (памяти всего 4 ГБ).'},
- {n:'Intel Arc B580 12 ГБ',b:'Intel',u:300,gs:128,v:12,w:190,y:'12 ГБ памяти за небольшие деньги: хороша для 1080p и 1440p.'},
- {n:'Radeon RX 6600 8 ГБ',b:'AMD',u:210,gs:115,v:8,w:132,y:'Лучший новый вариант за небольшие деньги: уверенный 1080p в большинстве игр.'},
- {n:'GeForce RTX 4060 8 ГБ',b:'NVIDIA',u:340,gs:122,v:8,w:115,y:'Тихая, холодная и экономичная, с DLSS 3: удобный выбор для 1080p.'},
- {n:'Radeon RX 7600 8 ГБ',b:'AMD',u:310,gs:118,v:8,w:165,y:'Добротный 1080p на свежей архитектуре RDNA 3 по доступной цене.'},
- {n:'GeForce RTX 5060 8 ГБ',b:'NVIDIA',u:360,gs:138,v:8,w:145,y:'Новая архитектура Blackwell и DLSS 4: быстрее 4060 при близкой цене.'},
- {n:'GeForce RTX 4060 Ti 8 ГБ',b:'NVIDIA',u:440,gs:150,v:8,w:160,y:'Запас по мощности для 1080p/1440p с поддержкой DLSS 3.'},
- {n:'Radeon RX 9060 XT 16 ГБ',b:'AMD',u:480,gs:168,v:16,w:160,y:'16 ГБ памяти и свежая RDNA 4: уверенный 1440p по средней цене.'},
- {n:'GeForce RTX 5060 Ti 16 ГБ',b:'NVIDIA',u:550,gs:170,v:16,w:180,y:'16 ГБ памяти и DLSS 4: хороша и для 1440p, и для работы с графикой.'},
- {n:'Radeon RX 7700 XT 12 ГБ',b:'AMD',u:470,gs:165,v:12,w:245,y:'12 ГБ памяти и сильный 1080p/1440p без компромиссов.'},
- {n:'Radeon RX 7800 XT 16 ГБ',b:'AMD',u:560,gs:205,v:16,w:263,y:'16 ГБ памяти и запас мощности для 1440p по хорошей цене.'},
- {n:'Radeon RX 9070 16 ГБ',b:'AMD',u:700,gs:238,v:16,w:220,y:'RDNA 4 и 16 ГБ: сильный 1440p и лёгкий 4K при умеренном аппетите.'},
- {n:'GeForce RTX 5070 12 ГБ',b:'NVIDIA',u:710,gs:245,v:12,w:250,y:'DLSS 4 и высокая скорость в 1440p: удобный верх среднего класса.'},
- {n:'GeForce RTX 4070 SUPER 12 ГБ',b:'NVIDIA',u:750,gs:232,v:12,w:220,y:'DLSS 3, низкое энергопотребление и уверенный 1440p.'},
- {n:'Radeon RX 9070 XT 16 ГБ',b:'AMD',u:800,gs:275,v:16,w:304,y:'Топ RDNA 4: максимум FPS на рубль в 1440p и комфортный 4K.'},
- {n:'GeForce RTX 5070 Ti 16 ГБ',b:'NVIDIA',u:950,gs:330,v:16,w:300,y:'16 ГБ и DLSS 4: топ для 1440p и лёгкого 4K.'},
- {n:'GeForce RTX 5080 16 ГБ',b:'NVIDIA',u:1500,gs:440,v:16,w:360,y:'Флагман для 4K и тяжёлого рендера: максимум мощности в сборке.'},
- {n:'GeForce GTX 1060 6 ГБ (б/у)',used:1,b:'NVIDIA',u:55,gs:50,v:6,w:120,y:'Б/У за копейки: лёгкие игры и офис, пока копится бюджет на лучшее.'},
- {n:'Radeon RX 580 8 ГБ (б/у)',used:1,b:'AMD',u:50,gs:48,v:8,w:185,y:'Б/У: недорого и с 8 ГБ памяти, но прожорлива и стара.'},
- {n:'GeForce GTX 1660 SUPER 6 ГБ (б/у)',used:1,b:'NVIDIA',u:90,gs:80,v:6,w:125,y:'Б/У за копейки: быстрее новых карт той же цены.'},
- {n:'Radeon RX 5700 XT 8 ГБ (б/у)',used:1,b:'AMD',u:120,gs:98,v:8,w:225,y:'Б/У: производительность уровня RTX 3060 за малые деньги.'},
- {n:'GeForce RTX 2060 SUPER 8 ГБ (б/у)',used:1,b:'NVIDIA',u:135,gs:92,v:8,w:175,y:'Б/У: DLSS и трассировка уже на борту, мощность около RTX 3060.'},
- {n:'GeForce RTX 3060 12 ГБ (б/у)',used:1,b:'NVIDIA',u:180,gs:100,v:12,w:170,y:'Б/У: 12 ГБ памяти, рабочая лошадка для игр и монтажа за небольшие деньги.'},
- {n:'GeForce RTX 3060 Ti 8 ГБ (б/у)',used:1,b:'NVIDIA',u:220,gs:130,v:8,w:200,y:'Б/У: по скорости обгоняет новую RTX 4060 и стоит дешевле.'},
- {n:'Radeon RX 6700 XT 12 ГБ (б/у)',used:1,b:'AMD',u:230,gs:140,v:12,w:230,y:'Б/У: 12 ГБ памяти и сильный 1080p/1440p за разумную цену.'},
- {n:'GeForce RTX 3070 8 ГБ (б/у)',used:1,b:'NVIDIA',u:260,gs:148,v:8,w:220,y:'Б/У: ураганный 1080p и хороший 1440p, но памяти всего 8 ГБ.'},
- {n:'Radeon RX 6800 XT 16 ГБ (б/у)',used:1,b:'AMD',u:300,gs:185,v:16,w:300,y:'Б/У: 16 ГБ и мощь уровня RTX 3080, самый большой FPS на каждый доллар.'},
- {n:'GeForce RTX 3080 10 ГБ (б/у)',used:1,b:'NVIDIA',u:360,gs:190,v:10,w:320,y:'Б/У: быстрая карта для 1440p, но с высоким аппетитом по питанию.'},
- {n:'GeForce RTX 4070 12 ГБ (б/у)',used:1,b:'NVIDIA',u:460,gs:210,v:12,w:200,y:'Б/У: DLSS 3 и скромное энергопотребление, мощность уровня RTX 3080.'},
- {n:'GeForce RTX 3080 Ti 12 ГБ (б/у)',used:1,b:'NVIDIA',u:460,gs:205,v:12,w:350,y:'Б/У: сильная карта для 1440p/4K, требует хорошего охлаждения.'},
- {n:'GeForce RTX 3090 24 ГБ (б/у)',used:1,b:'NVIDIA',u:600,gs:210,v:24,w:350,y:'Б/У: 24 ГБ памяти, козырь для рендера и 3D, где решает объём VRAM.'},
- {n:'GeForce RTX 4080 16 ГБ (б/у)',used:1,b:'NVIDIA',u:900,gs:350,v:16,w:320,y:'Б/У: топовая мощность и DLSS 3 заметно дешевле нового аналога.'},
- {n:'GeForce RTX 4090 24 ГБ (б/у)',used:1,b:'NVIDIA',u:1700,gs:520,v:24,w:450,y:'Б/У: лучшая карта поколения, 24 ГБ памяти для 4K и тяжёлого рендера.'}
-];
-const SSD=[
- {n:'Kingston NV3 500 ГБ NVMe',gb:500,u:40,y:'Быстрый NVMe под систему и пару игр по цене обычного SATA.'},
- {n:'WD Blue SN580 1 ТБ NVMe',gb:1000,u:70,y:'1 ТБ: система, рабочие проекты и десяток современных игр.'},
- {n:'Samsung 990 EVO 1 ТБ NVMe',gb:1000,u:100,sp:1,y:'1 ТБ с высокой скоростью чтения и записи: быстрая загрузка проектов и игр.'},
- {n:'Crucial P3 Plus 2 ТБ NVMe',gb:2000,u:130,y:'2 ТБ: проекты, кэш монтажа и большая игровая библиотека на одном диске.'},
- {n:'Crucial P3 Plus 4 ТБ NVMe',gb:4000,u:270,y:'4 ТБ: архив видео, 3D-проекты и огромная библиотека игр.'}
-];
-const PSU=[
- {n:'Deepcool PK450D 450 Вт 80+ Bronze',w:450,u:45},
- {n:'Deepcool PK550D 550 Вт 80+ Bronze',w:550,u:55},
- {n:'Deepcool PK650D 650 Вт 80+ Bronze',w:650,u:70},
- {n:'Corsair RM750e 750 Вт 80+ Gold',w:750,u:130},
- {n:'Corsair RM850e 850 Вт 80+ Gold',w:850,u:155},
- {n:'Corsair RM1000e 1000 Вт 80+ Gold',w:1000,u:200}
-];
-const CASE=[
- {n:'Deepcool Matrexx 40 (mATX)',u:40,y:'Компактный mATX-корпус с сетчатой передней панелью: недорого и хорошо продувается.'},
- {n:'Deepcool CC560 (ATX)',u:65,y:'Продуваемый ATX-корпус с четырьмя вентиляторами в комплекте.'},
- {n:'Lian Li Lancool 216 (ATX)',u:130,y:'Два вентилятора по 160 мм и мощный поток воздуха для горячих и длинных видеокарт.'},
- {n:'Fractal Design North (ATX)',u:180,y:'Аккуратный корпус с сетчатой панелью: хороший воздушный поток и спокойный дизайн.'}
-];
-const COOL=[
- {n:'Deepcool AG400',u:25,y:'Башенный кулер за копейки: тише и холоднее, чем у боксового кулера.'},
- {n:'Thermalright Peerless Assassin 120 SE',u:45,y:'Лучший кулер за свои деньги: держит жаркие 8–20-ядерные процессоры.'},
- {n:'Deepcool AK620',u:75,y:'Двухбашенный кулер: нужен самым горячим процессорам, держит 14900F и 14600KF.'}
-];
 
 /* ---------- Игры и модель FPS ---------- */
 const FG=[
@@ -483,10 +398,13 @@ function specOf(cat,p){
   }
 }
 const CATALOG=[];
-[['cpu',CPU],['board',BOARD],['ram',RAM],['gpu',GPU],['ssd',SSD],['psu',PSU],['case',CASE],['cool',COOL]].forEach(([cat,arr])=>arr.forEach(p=>{
-  const sp=specOf(cat,p);
-  CATALOG.push({cat,p,sp,hay:(CAT[cat][0]+' '+CAT[cat][1]+' '+p.n+' '+sp).toLowerCase()});
-}));
+function buildCatalog(){
+  CATALOG.length=0;
+  [['cpu',CPU],['board',BOARD],['ram',RAM],['gpu',GPU],['ssd',SSD],['psu',PSU],['case',CASE],['cool',COOL]].forEach(([cat,arr])=>arr.forEach(p=>{
+    const sp=specOf(cat,p);
+    CATALOG.push({cat,p,sp,hay:(CAT[cat][0]+' '+CAT[cat][1]+' '+p.n+' '+sp).toLowerCase()});
+  }));
+}
 
 /* ---------- Состояние ---------- */
 const S={region:null,budget:0,task:'games',used:false,cb:'any',gb:'any'};
@@ -558,7 +476,7 @@ const lnk=(x,c,t)=>`<a class="${c}" href="${esc(x.u)}" target="_blank" rel="noop
 function rowHTML(cat,p,text,opt={}){
   const lab=CAT[cat][1];
   let price,act='';
-  if(opt.free)price='<span style="color:var(--dm);font:400 13px Inter,sans-serif">В комплекте</span>';
+  if(opt.free)price='<span style="color:var(--dm);font:400 13px Manrope,sans-serif">В комплекте</span>';
   else{
     price=esc(fmt(P(p.u)));
     const L=links(p,!!opt.used);
@@ -746,7 +664,7 @@ function init(){
   render();
   if(needModal)showModal(true,guessRegion());
 }
-init();
+loadDB();
 })();
 </script>
 </body>
