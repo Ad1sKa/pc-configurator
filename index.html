@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Конфигуратор ПК под бюджет: Беларусь, Россия, Казахстан</title>
+<meta name="description" content="Подберите совместимую сборку ПК под свой бюджет в BYN, RUB, KZT или USD: цены, ожидаемый FPS и поиск деталей в местных магазинах.">
+<meta name="theme-color" content="#09090b">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23fafafa%22/><rect x=%228%22 y=%228%22 width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%2309090b%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090b;--p1:#0f0f12;--p2:#18181b;--ln:#27272a;--ln2:#3f3f46;--tx:#fafafa;--t2:#d4d4d8;--mu:#a1a1aa;--dm:#71717a;--ac:#818cf8;--ok:#4ade80;--wn:#facc15;--bd:#f87171;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body,h1,h2,h3,p,ul{margin:0}ul{padding:0;list-style:none}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--t2);font:14px/1.5 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit}
+::selection{background:var(--ac);color:#09090b}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+
+/* Шапка */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(9,9,11,.92);border-bottom:1px solid var(--ln);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hdr__in{display:flex;align-items:center;gap:24px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font:500 15px var(--mono);letter-spacing:-.02em;color:var(--tx);text-decoration:none}
+.brand i{display:block;width:16px;height:16px;border-radius:4px;background:var(--tx);position:relative}
+.brand i::after{content:"";position:absolute;inset:4px;border-radius:1px;background:var(--bg)}
+.nav{display:flex;gap:2px;margin-right:auto}
+.nav a{padding:6px 10px;border-radius:6px;font-size:13px;color:var(--mu);text-decoration:none;transition:color .15s,background .15s}
+.nav a:hover{color:var(--tx);background:var(--p2)}
+.rg{display:flex;align-items:center;gap:8px;font:11px var(--mono);letter-spacing:.06em;color:var(--dm);text-transform:uppercase}
+.sel{appearance:none;-webkit-appearance:none;padding:6px 28px 6px 10px;border:1px solid var(--ln2);border-radius:6px;background:var(--p1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%2371717a' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>") no-repeat right 10px center;font-size:13px;color:var(--tx);cursor:pointer;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif}
+.sel:hover{border-color:var(--dm)}
+
+/* Заголовок страницы */
+.ph{padding:36px 0 26px}
+.ph h1{font:600 28px/1.2 'Inter',sans-serif;letter-spacing:-.025em;color:var(--tx)}
+.ph p{margin-top:8px;max-width:640px;color:var(--mu)}
+
+/* Каркас */
+.layout{display:grid;grid-template-columns:288px minmax(0,1fr);gap:24px;align-items:start;padding-bottom:56px}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.side{position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto;border:1px solid var(--ln);border-radius:10px;background:var(--p1)}
+.fs{padding:16px;border-top:1px solid var(--ln)}
+.fs:first-child{border-top:0}
+.fs__t{margin-bottom:12px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
+.big{font:500 26px/1.1 var(--mono);color:var(--tx);letter-spacing:-.02em}
+.hint{margin-top:4px;font:11px var(--mono);color:var(--dm)}
+.range{-webkit-appearance:none;appearance:none;display:block;width:100%;height:4px;margin:16px 0 8px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(90deg,var(--tx) var(--pct,0%),var(--ln2) var(--pct,0%))}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--tx);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--tx)}
+.range::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--tx);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--tx)}
+.rng{display:flex;justify-content:space-between;font:11px var(--mono);color:var(--dm)}
+.ps{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:14px}
+.ps button{padding:7px 9px;border:1px solid var(--ln);border-radius:6px;background:transparent;color:var(--t2);text-align:left;font-size:12px;transition:border-color .15s,background .15s}
+.ps button b{display:block;font-weight:500}
+.ps button span{font:11px var(--mono);color:var(--dm)}
+.ps button:hover{border-color:var(--ln2);background:var(--p2)}
+.ps button[aria-pressed=true]{border-color:var(--tx);background:var(--p2)}
+.rd{display:flex;gap:10px;width:100%;padding:8px 6px;border:0;border-radius:6px;background:transparent;text-align:left;transition:background .15s}
+.rd:hover{background:var(--p2)}
+.rd i{flex:none;width:14px;height:14px;margin-top:3px;border-radius:50%;border:1px solid var(--ln2)}
+.rd[aria-pressed=true] i{background:var(--tx);border-color:var(--tx);box-shadow:inset 0 0 0 3px var(--bg)}
+.rd b{display:block;font-weight:500;color:var(--tx);font-size:13px}
+.rd span{font-size:12px;color:var(--dm)}
+.sg{display:flex;border:1px solid var(--ln);border-radius:6px;overflow:hidden}
+.sg button{flex:1;padding:6px 4px;border:0;border-right:1px solid var(--ln);background:transparent;color:var(--mu);font-size:12px}
+.sg button:last-child{border-right:0}
+.sg button:hover{color:var(--tx)}
+.sg button[aria-pressed=true]{background:var(--p2);color:var(--tx)}
+.lab{display:block;margin:0 0 6px;font-size:12px;color:var(--mu)}
+.lab+.sg{margin-bottom:14px}
+.sg:last-child{margin-bottom:0}
+.tg{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.tg b{display:block;font-weight:500;color:var(--tx);font-size:13px}
+.tg p{margin-top:2px;font-size:12px;color:var(--dm)}
+.sw{position:relative;flex:none;width:34px;height:20px;border:0;border-radius:99px;background:var(--ln2);transition:background .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--tx);transition:transform .2s,background .2s}
+.sw[aria-checked=true]{background:var(--tx)}
+.sw[aria-checked=true]::after{transform:translateX(14px);background:var(--bg)}
+#usedHint{margin-top:8px;font:11px var(--mono);color:var(--ok)}
+
+/* Панели */
+.pn{border:1px solid var(--ln);border-radius:10px;background:var(--p1);overflow:hidden}
+.pn__h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--ln)}
+.pn__h h2{font:600 14px 'Inter',sans-serif;color:var(--tx)}
+.pn__h .sub{display:block;margin-top:2px;font:11px var(--mono);color:var(--dm)}
+.pn__b{padding:16px}
+.sm{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.k{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
+.v{margin-top:4px;font:500 32px/1.1 var(--mono);letter-spacing:-.03em;color:var(--tx)}
+.v2{margin-top:4px;font:500 18px/1.2 var(--mono);text-align:right}
+.pg{height:4px;margin-top:16px;border-radius:2px;background:var(--p2);overflow:hidden}
+.pg i{display:block;height:100%;background:var(--tx);transition:width .5s cubic-bezier(.22,.8,.24,1)}
+.cps{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.cp{display:inline-flex;align-items:center;padding:2px 8px;border:1px solid var(--ln);border-radius:5px;font:11px var(--mono);color:var(--mu)}
+.wr{margin-bottom:14px;padding:10px 12px;border:1px solid rgba(248,113,113,.4);border-radius:8px;background:rgba(248,113,113,.06);font-size:13px;color:#fca5a5}
+.note{padding:12px 16px;border-top:1px solid var(--ln);font-size:12px;color:var(--dm)}
+
+/* Таблица */
+.tr{display:grid;grid-template-columns:56px minmax(0,1fr) 120px minmax(200px,auto);gap:16px;align-items:center;padding:14px 16px;border-top:1px solid var(--ln);transition:background .15s}
+.tr.th{padding:8px 16px;background:var(--bg);font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dm)}
+.tr:not(.th):hover{background:rgba(255,255,255,.02)}
+.tr .r{text-align:right}
+.tag{display:inline-block;padding:2px 0;width:44px;border:1px solid var(--ln);border-radius:4px;text-align:center;font:500 10px var(--mono);letter-spacing:.04em;color:var(--mu)}
+.nm b{font-weight:500;color:var(--tx)}
+.nm p{margin-top:2px;font-size:13px;color:var(--dm)}
+.ub{display:inline-block;margin-left:8px;padding:0 6px;border:1px solid rgba(250,204,21,.35);border-radius:4px;font:500 10px/16px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--wn);vertical-align:1px}
+.pr{text-align:right;font:500 15px var(--mono);color:var(--tx);letter-spacing:-.01em}
+.pr small{font:400 12px var(--mono);color:var(--dm)}
+.ac{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:6px 12px}
+.ac .mr{flex-basis:100%;text-align:right;font-size:11px;color:var(--dm)}
+.ac .mr a{margin-left:8px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid var(--ln2);border-radius:6px;background:transparent;font-size:12px;font-weight:500;color:var(--tx);text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.b:hover{background:var(--p2);border-color:var(--dm)}
+.b em{font-style:normal;color:var(--dm);font-weight:400}
+.b--p{border-color:var(--tx);background:var(--tx);color:#09090b}
+.b--p:hover{background:#e4e4e7;border-color:#e4e4e7}
+.lk{font-size:12px;color:var(--mu);text-decoration:none;border-bottom:1px dotted var(--ln2)}
+.lk:hover{color:var(--tx);border-color:var(--mu)}
+
+/* FPS */
+.fp{display:grid;grid-template-columns:160px minmax(0,1fr) 96px;gap:16px;align-items:center;padding:12px 16px;border-top:1px solid var(--ln)}
+.fp:first-of-type{border-top:0}
+.fp span:first-child{color:var(--t2)}
+.tk{height:6px;border-radius:3px;background:var(--p2);overflow:hidden}
+.bar{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.22,.8,.24,1),background .3s}
+.bar-r{background:var(--bd)}.bar-y{background:var(--wn)}.bar-g{background:var(--ok)}
+.fp .mono{text-align:right;color:var(--tx)}
+
+/* Чек-лист */
+details>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+details>summary b{display:block;font-weight:600;color:var(--tx)}
+details>summary span{font-size:12px;color:var(--dm)}
+details>summary::after{content:"+";font:400 20px/1 var(--mono);color:var(--dm)}
+details[open]>summary::after{content:"\2212"}
+details[open]>summary{border-bottom:1px solid var(--ln)}
+.chl{padding:8px}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:6px;cursor:pointer}
+.chk:hover{background:var(--p2)}
+.chk input{flex:none;width:16px;height:16px;margin-top:3px;accent-color:#818cf8}
+.chk .t{display:block;font-weight:500;color:var(--tx)}
+.chk .t small{margin-left:6px;font:11px var(--mono);color:var(--dm);font-weight:400}
+.chk p{margin-top:2px;font-size:13px;color:var(--dm)}
+.chk:has(input:checked) .t{text-decoration:line-through;color:var(--dm)}
+
+/* Каталог */
+.cat{padding-bottom:64px}
+.cat__h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cat__h h2{font:600 20px 'Inter',sans-serif;letter-spacing:-.02em;color:var(--tx)}
+.cat__h p{margin-top:4px;color:var(--mu)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-bottom:1px solid var(--ln)}
+.inp{flex:1 1 260px;min-width:0;padding:8px 12px;border:1px solid var(--ln2);border-radius:6px;background:var(--bg);font-size:13px;color:var(--tx)}
+.inp::placeholder{color:var(--dm)}
+.inp:hover{border-color:var(--dm)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;border-bottom:1px solid var(--ln)}
+.chips button{padding:4px 10px;border:1px solid var(--ln);border-radius:99px;background:transparent;font-size:12px;color:var(--mu);transition:all .15s}
+.chips button:hover{color:var(--tx);border-color:var(--ln2)}
+.chips button[aria-pressed=true]{background:var(--tx);border-color:var(--tx);color:#09090b}
+.cnt{padding:8px 16px;font:11px var(--mono);color:var(--dm);border-bottom:1px solid var(--ln)}
+.empty{padding:36px 16px;text-align:center;color:var(--dm)}
+.more{display:flex;justify-content:center;padding:14px;border-top:1px solid var(--ln)}
+
+/* Модалка и тост */
+.md{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72)}
+.md.open{display:flex}
+.md__c{width:100%;max-width:420px;padding:24px;border:1px solid var(--ln2);border-radius:12px;background:var(--p1);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.md__c h2{font:600 18px 'Inter',sans-serif;color:var(--tx)}
+.md__c p{margin-top:6px;font-size:13px;color:var(--mu)}
+.opts{display:grid;gap:8px;margin-top:20px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--ln);border-radius:8px;background:transparent;text-align:left;transition:border-color .15s,background .15s}
+.opt:hover,.opt:focus-visible{border-color:var(--tx);background:var(--p2)}
+.opt b{font-weight:500;color:var(--tx)}
+.opt span{font:12px var(--mono);color:var(--dm)}
+.opt.rec::after{content:"рекомендуем";font:10px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ok);margin-left:auto;order:2}
+#toast{position:fixed;left:50%;bottom:24px;z-index:70;padding:10px 16px;border-radius:8px;background:var(--tx);color:#09090b;font-size:13px;font-weight:500;opacity:0;transform:translate(-50%,12px);pointer-events:none;transition:opacity .25s,transform .25s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.ftr{padding:28px 0 40px;border-top:1px solid var(--ln);font:11px var(--mono);color:var(--dm)}
+
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .side{position:static;max-height:none;overflow:visible}
+}
+@media(max-width:720px){
+  .rg span{display:none}.nav{display:none}.hdr__in{justify-content:space-between}
+  .tr.th{display:none}
+  .tr{grid-template-columns:44px minmax(0,1fr);gap:10px 12px}
+  .tr .pr{grid-column:2;text-align:left}
+  .tr .ac{grid-column:1/-1;justify-content:flex-start}
+  .ac .mr{text-align:left}
+  .fp{grid-template-columns:minmax(0,1fr) 80px}
+  .fp .tk{grid-column:1/-1;order:3}
+  .v{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<noscript><p style="padding:40px;text-align:center">Для работы конфигуратора включите JavaScript.</p></noscript>
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a href="#" class="brand"><i></i>pc/budget</a>
+    <nav class="nav" aria-label="Разделы"><a href="#build">Сборка</a><a href="#catalog">Каталог</a></nav>
+    <label class="rg"><span>Регион</span><select id="regionSel" class="sel" aria-label="Выбор страны"></select></label>
+  </div>
+</header>
+
+<main class="wrap" id="build">
+  <div class="ph">
+    <h1>Конфигуратор ПК</h1>
+    <p>Укажите бюджет и задачу. Получите совместимую сборку с ценами в вашей валюте, оценкой FPS и ссылками на местные магазины.</p>
+  </div>
+
+  <div class="layout">
+    <aside class="side" aria-label="Параметры сборки">
+      <div class="fs">
+        <div class="fs__t">Бюджет</div>
+        <div id="budgetVal" class="big">—</div>
+        <div id="budgetUsd" class="hint"></div>
+        <input id="budget" type="range" class="range" aria-label="Бюджет сборки">
+        <div class="rng"><span id="bMin"></span><span id="bMax"></span></div>
+        <div id="presets" class="ps"></div>
+      </div>
+      <div class="fs">
+        <div class="fs__t">Задача</div>
+        <div id="tasks"></div>
+      </div>
+      <div class="fs">
+        <div class="fs__t">Предпочтения</div>
+        <span class="lab">Процессор</span>
+        <div id="cbSeg" class="sg" role="group" aria-label="Производитель процессора"></div>
+        <span class="lab">Видеокарта</span>
+        <div id="gbSeg" class="sg" role="group" aria-label="Производитель видеокарты"></div>
+      </div>
+      <div class="fs">
+        <div class="tg">
+          <div>
+            <b>Б/У видеокарта</b>
+            <p>Куфар, Авито, OLX. Подберём более мощную модель за те же деньги.</p>
+          </div>
+          <button id="usedSw" class="sw" role="switch" aria-checked="false" aria-label="Использовать Б/У видеокарту"></button>
+        </div>
+        <p id="usedHint"></p>
+      </div>
+    </aside>
+
+    <section class="col" aria-live="polite">
+      <div class="pn">
+        <div class="pn__h">
+          <div><h2>Сборка</h2><span id="subline" class="sub"></span></div>
+          <button id="share" class="b b--p" type="button">Скопировать ссылку</button>
+        </div>
+        <div id="summary" class="pn__b"></div>
+        <div class="tr th"><span>Тип</span><span>Комплектующее</span><span class="r">Цена</span><span class="r">Поиск</span></div>
+        <ul id="parts"></ul>
+        <p class="note">Цены ориентировочные. Реальные могут отличаться, проверяйте в магазинах.</p>
+      </div>
+
+      <div class="pn">
+        <div class="pn__h"><h2>Ожидаемый FPS</h2><span class="cp">1080p · Высокие</span></div>
+        <div id="fpsList"></div>
+        <p id="fpsNote" class="note"></p>
+      </div>
+
+      <details id="usedCheck" class="pn" hidden>
+        <summary><div><b>Как безопасно проверить б/у видеокарту за 5 минут</b><span>Отмечено: <span id="chkCount" class="mono">0 из 6</span></span></div></summary>
+        <div class="chl">
+          <label class="chk"><input type="checkbox"><div><span class="t">Возьмите с собой нужное<small>до встречи</small></span><p>Флешку с GPU-Z и FurMark/OCCT, монитор или ноутбук с HDMI, переходники питания. Заранее договоритесь о проверке на месте.</p></div></label>
+          <label class="chk"><input type="checkbox"><div><span class="t">Осмотрите карту<small>1 мин</small></span><p>Следы вскрытия и сорванные пломбы, окислы на разъёме PCIe, вздутые конденсаторы, потёртости, запах гари, пыль и жир на радиаторе.</p></div></label>
+          <label class="chk"><input type="checkbox"><div><span class="t">Сверьте модель в GPU-Z<small>1 мин</small></span><p>Название, чип, объём и тип памяти, версия BIOS должны совпадать с объявлением. Подделок и перепрошитых карт хватает.</p></div></label>
+          <label class="chk"><input type="checkbox"><div><span class="t">Прогоните под нагрузкой<small>2 мин</small></span><p>FurMark, OCCT или тяжёлая игра. Ядро держится в пределах 85 °C, hotspot не выше 105 °C, память не выше 100 °C. Нет артефактов, полос, вылетов драйвера, вентиляторы без треска.</p></div></label>
+          <label class="chk"><input type="checkbox"><div><span class="t">Узнайте историю<small>30 сек</small></span><p>Был ли майнинг, менялись ли термопаста и прокладки, остались ли чек, коробка и гарантия (проверьте по серийному номеру).</p></div></label>
+          <label class="chk"><input type="checkbox"><div><span class="t">Платите только после проверки<small>30 сек</small></span><p>Без предоплат и отправки незнакомым людям, встреча в людном месте. Сфотографируйте серийный номер и сохраните переписку.</p></div></label>
+        </div>
+      </details>
+    </section>
+  </div>
+</main>
+
+<section class="wrap cat" id="catalog">
+  <div class="cat__h">
+    <div><h2>Каталог комплектующих</h2><p>Поиск по базе: фильтруйте по типу и названию, открывайте поиск цены в местных магазинах.</p></div>
+  </div>
+  <div class="pn">
+    <div class="ctl">
+      <input id="catQ" class="inp" type="search" placeholder="Поиск: rtx 4060, ryzen 5, ddr5, am5, 650 вт..." aria-label="Поиск по каталогу" autocomplete="off">
+      <select id="catSort" class="sel" aria-label="Сортировка">
+        <option value="asc">Сначала дешёвые</option>
+        <option value="desc">Сначала дорогие</option>
+      </select>
+    </div>
+    <div id="catChips" class="chips" role="group" aria-label="Тип комплектующих"></div>
+    <div id="catCount" class="cnt"></div>
+    <div class="tr th"><span>Тип</span><span>Комплектующее</span><span class="r">Цена</span><span class="r">Поиск</span></div>
+    <ul id="catList"></ul>
+    <div id="catMoreW" class="more" hidden><button id="catMore" class="b" type="button">Показать ещё</button></div>
+  </div>
+</section>
+
+<footer class="wrap ftr">Расчётные цены и FPS являются оценкой и не заменяют консультацию продавца.</footer>
+
+<div id="modal" class="md" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="md__c">
+    <h2 id="mTitle">Выберите страну</h2>
+    <p>Покажем цены в вашей валюте и ссылки на местные магазины. Регион можно сменить в любой момент в шапке сайта.</p>
+    <div id="mOpts" class="opts"></div>
+  </div>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+(()=>{
+'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const enc=encodeURIComponent;
+
+/* ---------- Регионы и магазины ---------- */
+const REG={
+  BY:{name:'Беларусь',cur:'BYN',sym:'BYN',k:3.35,min:1300,max:7500,step:50,round:10},
+  RU:{name:'Россия',cur:'RUB',sym:'₽',k:98,min:38000,max:220000,step:1000,round:10},
+  KZ:{name:'Казахстан',cur:'KZT',sym:'₸',k:495,min:200000,max:1100000,step:5000,round:100},
+  CIS:{name:'Другая страна СНГ',cur:'USD',sym:'$',k:1,min:390,max:2250,step:10,round:1}
+};
+const goo=q=>`https://www.google.com/search?q=${enc(q)}`;
+const site=d=>q=>goo(`site:${d} ${q}`);
+const SHOP={
+  BY:{n:{name:'Onliner',url:q=>`https://catalog.onliner.by/search?query=${enc(q)}`},u:{name:'Kufar',url:q=>`https://www.kufar.by/l?query=${enc(q)}`},
+      more:[{name:'21vek',url:q=>`https://www.21vek.by/search/?sa=&term=${enc(q)}`},{name:'Shop.by',url:q=>`https://shop.by/find/?findtext=${enc(q)}`}]},
+  RU:{n:{name:'Яндекс',url:q=>`https://yandex.ru/search/?text=${enc(q+' купить')}`},u:{name:'Avito',url:q=>`https://www.avito.ru/rossiya?q=${enc(q)}`},
+      more:[{name:'DNS',url:q=>`https://www.dns-shop.ru/search/?q=${enc(q)}`},{name:'Ozon',url:q=>`https://www.ozon.ru/search/?text=${enc(q)}`},{name:'Citilink',url:q=>`https://www.citilink.ru/search/?text=${enc(q)}`}]},
+  KZ:{n:{name:'Kaspi',url:q=>`https://kaspi.kz/shop/search/?text=${enc(q)}`},u:{name:'OLX',url:q=>`https://www.olx.kz/list/q-${enc(q.trim().replace(/\s+/g,'-'))}/`},
+      more:[{name:'Sulpak',url:site('sulpak.kz')},{name:'Technodom',url:site('technodom.kz')}]},
+  CIS:{n:{name:'Google',url:q=>goo(q+' купить')},u:{name:'Google',url:q=>goo(q+' б/у купить')},
+      more:[{name:'Google Shopping',url:q=>`https://www.google.com/search?tbm=shop&q=${enc(q)}`},{name:'AliExpress',url:q=>`https://www.aliexpress.com/wholesale?SearchText=${enc(q)}`}]}
+};
+
+/* ---------- База комплектующих (цены в USD) ---------- */
+/* CPU: s сокет, u цена, g игровой индекс, p индекс многопотока (Ryzen 5 5600 = 100), w пик. мощность, t мин. класс платы, box кулер в комплекте, ig встроенная графика */
+const CPU=[
+ {n:'AMD Ryzen 5 4500',b:'AMD',s:'AM4',u:60,g:80,p:80,w:65,t:1,box:1,y:'6 ядер Zen 2 с кулером: самый дешёвый способ получить нормальный игровой процессор.'},
+ {n:'AMD Ryzen 5 5500',b:'AMD',s:'AM4',u:80,g:92,p:92,w:65,t:1,box:1,y:'6 ядер Zen 3 с кулером в комплекте: недорогая основа для игрового ПК.'},
+ {n:'AMD Ryzen 5 5600',b:'AMD',s:'AM4',u:105,g:100,p:100,w:76,t:1,box:1,y:'Народный игровой процессор: 6 ядер и 32 МБ кэша по цене бюджетной модели.'},
+ {n:'AMD Ryzen 5 5600G',b:'AMD',s:'AM4',u:100,g:95,p:97,w:76,t:1,box:1,ig:1,y:'Встроенная графика Vega 7: ПК работает сразу, видеокарту можно докупить позже.'},
+ {n:'AMD Ryzen 7 5700X',b:'AMD',s:'AM4',u:145,g:104,p:135,w:90,t:1,y:'8 ядер Zen 3: запас для монтажа, стримов и многозадачности на проверенной платформе.'},
+ {n:'AMD Ryzen 9 5900X',b:'AMD',s:'AM4',u:215,g:108,p:205,w:105,t:2,y:'12 ядер на AM4: рендер и монтаж без смены платформы.'},
+ {n:'AMD Ryzen 7 5800X3D',b:'AMD',s:'AM4',u:270,g:135,p:140,w:105,t:2,y:'96 МБ кэша 3D V-Cache: лидер игр на AM4 без смены платформы.'},
+ {n:'Intel Core i3-12100F',b:'Intel',s:'1700',u:90,g:98,p:70,w:80,t:1,box:1,y:'4 быстрых ядра и кулер в комплекте: лучший игровой минимум на LGA1700.'},
+ {n:'Intel Core i5-12400F',b:'Intel',s:'1700',u:125,g:102,p:105,w:117,t:1,box:1,y:'6 производительных ядер и возможность апгрейда на i7/i9 позже.'},
+ {n:'Intel Core i5-13400F',b:'Intel',s:'1700',u:185,g:108,p:150,w:150,t:2,box:1,y:'10 ядер (6P + 4E): хорош и в играх, и в рендере за разумные деньги.'},
+ {n:'Intel Core i5-14400F',b:'Intel',s:'1700',u:200,g:110,p:155,w:148,t:2,box:1,y:'10 ядер и кулер в комплекте: чуть быстрее 13400F при близкой цене.'},
+ {n:'Intel Core i7-12700F',b:'Intel',s:'1700',u:250,g:116,p:215,w:180,t:2,box:1,y:'12 ядер с кулером: сильный многопоток за умеренные деньги.'},
+ {n:'Intel Core i5-14600KF',b:'Intel',s:'1700',u:260,g:125,p:215,w:181,t:2,y:'14 ядер и высокие частоты: быстрый игровой процессор с запасом на разгон.'},
+ {n:'Intel Core i7-14700F',b:'Intel',s:'1700',u:330,g:130,p:260,w:200,t:2,y:'20 ядер: уверенный выбор для монтажа и 3D, в играх запас на годы.'},
+ {n:'Intel Core i9-14900F',b:'Intel',s:'1700',u:480,g:140,p:330,w:219,t:2,y:'24 ядра: максимум многопотока на LGA1700 для тяжёлых рабочих задач.'},
+ {n:'AMD Ryzen 5 7500F',b:'AMD',s:'AM5',u:150,g:122,p:120,w:88,t:1,y:'Zen 4 на новой платформе AM5: быстрее 5600 и открытый путь к апгрейду.'},
+ {n:'AMD Ryzen 5 8400F',b:'AMD',s:'AM5',u:155,g:112,p:112,w:88,t:1,box:1,y:'6 ядер Zen 4 с кулером: недорогой вход на AM5.'},
+ {n:'AMD Ryzen 5 7600',b:'AMD',s:'AM5',u:185,g:124,p:122,w:88,t:1,box:1,y:'6 ядер Zen 4, кулер в комплекте и встроенная графика на всякий случай.'},
+ {n:'AMD Ryzen 7 7700',b:'AMD',s:'AM5',u:245,g:130,p:170,w:88,t:1,y:'8 ядер Zen 4 при скромном нагреве: универсал для игр и работы.'},
+ {n:'AMD Ryzen 5 9600X',b:'AMD',s:'AM5',u:230,g:132,p:130,w:88,t:1,y:'Zen 5: свежая архитектура и высокая частота при низком нагреве.'},
+ {n:'AMD Ryzen 9 7900',b:'AMD',s:'AM5',u:360,g:132,p:250,w:120,t:2,y:'12 ядер Zen 4: максимум скорости рендера и экспорта на AM5.'},
+ {n:'AMD Ryzen 7 9700X',b:'AMD',s:'AM5',u:320,g:138,p:178,w:88,t:1,y:'8 ядер Zen 5: быстрый и холодный универсал для игр и работы.'},
+ {n:'AMD Ryzen 7 7800X3D',b:'AMD',s:'AM5',u:380,g:165,p:175,w:120,t:2,y:'3D V-Cache даёт максимум FPS в играх среди процессоров своего класса.'},
+ {n:'AMD Ryzen 9 9900X',b:'AMD',s:'AM5',u:410,g:140,p:260,w:120,t:2,y:'12 ядер Zen 5: быстрый рендер и стримы без компромиссов.'},
+ {n:'AMD Ryzen 7 9800X3D',b:'AMD',s:'AM5',u:480,g:185,p:180,w:120,t:2,y:'Лучший игровой процессор: Zen 5 и 3D V-Cache в одном чипе.'}
+];
+/* BOARD: m тип памяти, t класс, f форм-фактор (по умолчанию mATX) */
+const BOARD=[
+ {n:'Gigabyte A520M S2H',s:'AM4',m:'DDR4',u:55,t:1,y:'Самая доступная плата под AM4: всё нужное для Ryzen 5000 без переплат.'},
+ {n:'MSI B550M PRO-VDH WiFi',s:'AM4',m:'DDR4',u:85,t:2,y:'Усиленное питание, PCIe 4.0 и Wi-Fi: потянет Ryzen 7 и 5800X3D.'},
+ {n:'ASUS TUF GAMING B550-PLUS WIFI II',s:'AM4',m:'DDR4',u:140,t:2,f:'ATX',y:'Мощное питание и два слота M.2: надёжная основа для Ryzen 9 5900X.'},
+ {n:'ASRock H610M-HDV/M.2',s:'1700',m:'DDR4',u:65,t:1,y:'Бюджетная LGA1700 с недорогой DDR4: хватит для i3/i5 без разгона.'},
+ {n:'MSI PRO B760M-P DDR4',s:'1700',m:'DDR4',u:105,t:2,y:'Надёжное питание под i5 13-го поколения и недорогая память DDR4.'},
+ {n:'Gigabyte B760M GAMING X DDR4',s:'1700',m:'DDR4',u:125,t:2,y:'Усиленное питание и радиаторы: уверенно держит i7 на DDR4.'},
+ {n:'ASUS PRIME B760M-A WIFI',s:'1700',m:'DDR5',u:150,t:2,y:'Современная плата с DDR5 и Wi-Fi: выдержит i7-14700F.'},
+ {n:'MSI MAG B760M MORTAR WIFI',s:'1700',m:'DDR5',u:190,t:2,y:'Мощное питание и хорошее охлаждение VRM под i7 и i9.'},
+ {n:'Gigabyte A620M S2H',s:'AM5',m:'DDR5',u:85,t:1,y:'Входной билет на AM5: DDR5 и путь к апгрейду на будущие Ryzen.'},
+ {n:'MSI PRO B650M-P',s:'AM5',m:'DDR5',u:135,t:2,y:'Мощное питание и запас слотов: выдержит Ryzen 7/9 и процессоры X3D.'},
+ {n:'Gigabyte B650 GAMING X AX V2',s:'AM5',m:'DDR5',u:175,t:2,f:'ATX',y:'ATX с Wi-Fi и PCIe 5.0 под M.2: комфортный выбор для X3D и Ryzen 9.'},
+ {n:'ASUS TUF GAMING B650-PLUS WIFI',s:'AM5',m:'DDR5',u:215,t:2,f:'ATX',y:'Прочная плата с богатым питанием и Wi-Fi 6: надёжна на годы.'}
+];
+const RAM=[
+ {n:'Kingston Fury Beast 16 ГБ (2×8) DDR4-3200',m:'DDR4',gb:16,u:30,y:'Двухканальный комплект: для игр и повседневных задач хватает с запасом.'},
+ {n:'Kingston Fury Beast 32 ГБ (2×16) DDR4-3200',m:'DDR4',gb:32,u:55,y:'32 ГБ: комфортно для монтажа, десятков вкладок и тяжёлых игр.'},
+ {n:'Kingston Fury Beast 64 ГБ (2×32) DDR4-3200',m:'DDR4',gb:64,u:110,y:'64 ГБ DDR4 для тяжёлых проектов на платформах без DDR5.'},
+ {n:'Kingston Fury Beast 16 ГБ (2×8) DDR5-5600',m:'DDR5',gb:16,u:48,y:'Быстрая DDR5 в двухканале: достаточно для современных игр.'},
+ {n:'Kingston Fury Beast 32 ГБ (2×16) DDR5-6000',m:'DDR5',gb:32,u:85,y:'Оптимум для AM5: 32 ГБ на 6000 МТ/с для игр и работы.'},
+ {n:'Kingston Fury Beast 64 ГБ (2×32) DDR5-6000',m:'DDR5',gb:64,u:165,y:'64 ГБ для тяжёлых 3D-сцен, монтажа 4K и виртуальных машин.'}
+];
+/* GPU: gs индекс (RTX 3060 = 100), v объём видеопамяти, w мощность, b производитель, used = б/у */
+const NOGPU={id:'igpu',n:'Встроенная графика Radeon Vega 7',u:0,gs:15,v:2,w:0,y:'Видеокарта не нужна: графику даёт процессор. Дискретную можно докупить позже.'};
+const GPU=[
+ {n:'Radeon RX 6500 XT 4 ГБ',b:'AMD',u:120,gs:62,v:4,w:110,y:'Самая доступная новая карта для лёгких игр и киберспорта (памяти всего 4 ГБ).'},
+ {n:'Intel Arc B580 12 ГБ',b:'Intel',u:260,gs:128,v:12,w:190,y:'12 ГБ памяти за небольшие деньги: хороша для 1080p и 1440p.'},
+ {n:'Radeon RX 6600 8 ГБ',b:'AMD',u:175,gs:115,v:8,w:132,y:'Лучший новый вариант за небольшие деньги: уверенный 1080p в большинстве игр.'},
+ {n:'GeForce RTX 4060 8 ГБ',b:'NVIDIA',u:285,gs:122,v:8,w:115,y:'Тихая, холодная и экономичная, с DLSS 3: удобный выбор для 1080p.'},
+ {n:'Radeon RX 7600 8 ГБ',b:'AMD',u:260,gs:118,v:8,w:165,y:'Добротный 1080p на свежей архитектуре RDNA 3 по доступной цене.'},
+ {n:'GeForce RTX 5060 8 ГБ',b:'NVIDIA',u:300,gs:138,v:8,w:145,y:'Новая архитектура Blackwell и DLSS 4: быстрее 4060 при близкой цене.'},
+ {n:'GeForce RTX 4060 Ti 8 ГБ',b:'NVIDIA',u:380,gs:150,v:8,w:160,y:'Запас по мощности для 1080p/1440p с поддержкой DLSS 3.'},
+ {n:'Radeon RX 9060 XT 16 ГБ',b:'AMD',u:400,gs:168,v:16,w:160,y:'16 ГБ памяти и свежая RDNA 4: уверенный 1440p по средней цене.'},
+ {n:'GeForce RTX 5060 Ti 16 ГБ',b:'NVIDIA',u:460,gs:170,v:16,w:180,y:'16 ГБ памяти и DLSS 4: хороша и для 1440p, и для работы с графикой.'},
+ {n:'Radeon RX 7700 XT 12 ГБ',b:'AMD',u:390,gs:165,v:12,w:245,y:'12 ГБ памяти и сильный 1080p/1440p без компромиссов.'},
+ {n:'Radeon RX 7800 XT 16 ГБ',b:'AMD',u:470,gs:205,v:16,w:263,y:'16 ГБ памяти и запас мощности для 1440p по хорошей цене.'},
+ {n:'Radeon RX 9070 16 ГБ',b:'AMD',u:580,gs:238,v:16,w:220,y:'RDNA 4 и 16 ГБ: сильный 1440p и лёгкий 4K при умеренном аппетите.'},
+ {n:'GeForce RTX 5070 12 ГБ',b:'NVIDIA',u:590,gs:245,v:12,w:250,y:'DLSS 4 и высокая скорость в 1440p: удобный верх среднего класса.'},
+ {n:'GeForce RTX 4070 SUPER 12 ГБ',b:'NVIDIA',u:600,gs:232,v:12,w:220,y:'DLSS 3, низкое энергопотребление и уверенный 1440p.'},
+ {n:'Radeon RX 9070 XT 16 ГБ',b:'AMD',u:650,gs:275,v:16,w:304,y:'Топ RDNA 4: максимум FPS на рубль в 1440p и комфортный 4K.'},
+ {n:'GeForce RTX 5070 Ti 16 ГБ',b:'NVIDIA',u:780,gs:330,v:16,w:300,y:'16 ГБ и DLSS 4: топ для 1440p и лёгкого 4K.'},
+ {n:'GeForce RTX 5080 16 ГБ',b:'NVIDIA',u:1050,gs:440,v:16,w:360,y:'Флагман для 4K и тяжёлого рендера: максимум мощности в сборке.'},
+ {n:'GeForce GTX 1060 6 ГБ (б/у)',used:1,b:'NVIDIA',u:45,gs:50,v:6,w:120,y:'Б/У за копейки: лёгкие игры и офис, пока копится бюджет на лучшее.'},
+ {n:'Radeon RX 580 8 ГБ (б/у)',used:1,b:'AMD',u:40,gs:48,v:8,w:185,y:'Б/У: недорого и с 8 ГБ памяти, но прожорлива и стара.'},
+ {n:'GeForce GTX 1660 SUPER 6 ГБ (б/у)',used:1,b:'NVIDIA',u:75,gs:80,v:6,w:125,y:'Б/У за копейки: быстрее новых карт той же цены.'},
+ {n:'Radeon RX 5700 XT 8 ГБ (б/у)',used:1,b:'AMD',u:100,gs:98,v:8,w:225,y:'Б/У: производительность уровня RTX 3060 за малые деньги.'},
+ {n:'GeForce RTX 2060 SUPER 8 ГБ (б/у)',used:1,b:'NVIDIA',u:115,gs:92,v:8,w:175,y:'Б/У: DLSS и трассировка уже на борту, мощность около RTX 3060.'},
+ {n:'GeForce RTX 3060 12 ГБ (б/у)',used:1,b:'NVIDIA',u:150,gs:100,v:12,w:170,y:'Б/У: 12 ГБ памяти, рабочая лошадка для игр и монтажа за небольшие деньги.'},
+ {n:'GeForce RTX 3060 Ti 8 ГБ (б/у)',used:1,b:'NVIDIA',u:185,gs:130,v:8,w:200,y:'Б/У: по скорости обгоняет новую RTX 4060 и стоит дешевле.'},
+ {n:'Radeon RX 6700 XT 12 ГБ (б/у)',used:1,b:'AMD',u:190,gs:140,v:12,w:230,y:'Б/У: 12 ГБ памяти и сильный 1080p/1440p за разумную цену.'},
+ {n:'GeForce RTX 3070 8 ГБ (б/у)',used:1,b:'NVIDIA',u:215,gs:148,v:8,w:220,y:'Б/У: ураганный 1080p и хороший 1440p, но памяти всего 8 ГБ.'},
+ {n:'Radeon RX 6800 XT 16 ГБ (б/у)',used:1,b:'AMD',u:250,gs:185,v:16,w:300,y:'Б/У: 16 ГБ и мощь уровня RTX 3080, самый большой FPS на каждый доллар.'},
+ {n:'GeForce RTX 3080 10 ГБ (б/у)',used:1,b:'NVIDIA',u:300,gs:190,v:10,w:320,y:'Б/У: быстрая карта для 1440p, но с высоким аппетитом по питанию.'},
+ {n:'GeForce RTX 4070 12 ГБ (б/у)',used:1,b:'NVIDIA',u:380,gs:210,v:12,w:200,y:'Б/У: DLSS 3 и скромное энергопотребление, мощность уровня RTX 3080.'},
+ {n:'GeForce RTX 3080 Ti 12 ГБ (б/у)',used:1,b:'NVIDIA',u:380,gs:205,v:12,w:350,y:'Б/У: сильная карта для 1440p/4K, требует хорошего охлаждения.'},
+ {n:'GeForce RTX 3090 24 ГБ (б/у)',used:1,b:'NVIDIA',u:520,gs:210,v:24,w:350,y:'Б/У: 24 ГБ памяти, козырь для рендера и 3D, где решает объём VRAM.'},
+ {n:'GeForce RTX 4080 16 ГБ (б/у)',used:1,b:'NVIDIA',u:760,gs:350,v:16,w:320,y:'Б/У: топовая мощность и DLSS 3 заметно дешевле нового аналога.'},
+ {n:'GeForce RTX 4090 24 ГБ (б/у)',used:1,b:'NVIDIA',u:1500,gs:520,v:24,w:450,y:'Б/У: лучшая карта поколения, 24 ГБ памяти для 4K и тяжёлого рендера.'}
+];
+const SSD=[
+ {n:'Kingston NV3 500 ГБ NVMe',gb:500,u:33,y:'Быстрый NVMe под систему и пару игр по цене обычного SATA.'},
+ {n:'WD Blue SN580 1 ТБ NVMe',gb:1000,u:58,y:'1 ТБ: система, рабочие проекты и десяток современных игр.'},
+ {n:'Samsung 990 EVO 1 ТБ NVMe',gb:1000,u:85,sp:1,y:'1 ТБ с высокой скоростью чтения и записи: быстрая загрузка проектов и игр.'},
+ {n:'Crucial P3 Plus 2 ТБ NVMe',gb:2000,u:110,y:'2 ТБ: проекты, кэш монтажа и большая игровая библиотека на одном диске.'},
+ {n:'Crucial P3 Plus 4 ТБ NVMe',gb:4000,u:230,y:'4 ТБ: архив видео, 3D-проекты и огромная библиотека игр.'}
+];
+const PSU=[
+ {n:'Deepcool PK450D 450 Вт 80+ Bronze',w:450,u:35},
+ {n:'Deepcool PK550D 550 Вт 80+ Bronze',w:550,u:45},
+ {n:'Deepcool PK650D 650 Вт 80+ Bronze',w:650,u:55},
+ {n:'Corsair RM750e 750 Вт 80+ Gold',w:750,u:105},
+ {n:'Corsair RM850e 850 Вт 80+ Gold',w:850,u:125},
+ {n:'Corsair RM1000e 1000 Вт 80+ Gold',w:1000,u:165}
+];
+const CASE=[
+ {n:'Deepcool Matrexx 40 (mATX)',u:32,y:'Компактный mATX-корпус с сетчатой передней панелью: недорого и хорошо продувается.'},
+ {n:'Deepcool CC560 (ATX)',u:55,y:'Продуваемый ATX-корпус с четырьмя вентиляторами в комплекте.'},
+ {n:'Lian Li Lancool 216 (ATX)',u:105,y:'Два вентилятора по 160 мм и мощный поток воздуха для горячих и длинных видеокарт.'},
+ {n:'Fractal Design North (ATX)',u:140,y:'Аккуратный корпус с сетчатой панелью: хороший воздушный поток и спокойный дизайн.'}
+];
+const COOL=[
+ {n:'Deepcool AG400',u:20,y:'Башенный кулер за копейки: тише и холоднее, чем у боксового кулера.'},
+ {n:'Thermalright Peerless Assassin 120 SE',u:36,y:'Лучший кулер за свои деньги: держит жаркие 8–20-ядерные процессоры.'},
+ {n:'Deepcool AK620',u:60,y:'Двухбашенный кулер: нужен самым горячим процессорам, держит 14900F и 14600KF.'}
+];
+
+/* ---------- Игры и модель FPS ---------- */
+const FG=[
+ {id:'cs2',n:'Counter-Strike 2',a:2.8,b:2.4,max:400,w:.15},
+ {id:'cp',n:'Cyberpunk 2077',a:.65,b:1.1,max:180,w:.5},
+ {id:'dota',n:'Dota 2',a:1.6,b:1.7,max:300,w:.1},
+ {id:'gta',n:'GTA V',a:1.4,b:1.6,max:250,w:.25,cap:187}
+];
+const fpsOne=(f,c,g)=>Math.min(f.cap||1e9,Math.pow(Math.pow(g.gs*f.a,-3)+Math.pow(c.g*f.b,-3),-1/3));
+
+const CAT={cpu:['Процессоры','CPU'],board:['Материнские платы','MB'],ram:['Память','RAM'],gpu:['Видеокарты','GPU'],ssd:['Накопители','SSD'],psu:['Блоки питания','PSU'],case:['Корпуса','CASE'],cool:['Охлаждение','COOL']};
+const TASKS=[['games','Игры','Упор на видеокарту'],['creative','Монтаж и 3D','Ядра CPU, ОЗУ и видеопамять'],['office','Учёба и офис','ОЗУ, SSD и процессор']];
+const TASK_NAME={games:'Игры',creative:'Монтаж и 3D',office:'Учёба и офис'};
+const PRE=[['Ультра-бюджет',400],['Народный топ',700],['2K Гейминг',1250],['Максимум',2200]];
+const SEGS={cb:[['any','Любой'],['AMD','AMD'],['Intel','Intel']],gb:[['any','Любая'],['NVIDIA','NVIDIA'],['AMD','AMD']]};
+
+/* ---------- Каталог ---------- */
+const sockN=s=>s==='1700'?'LGA1700':s;
+const gbN=g=>g>=1000?(g/1000)+' ТБ':g+' ГБ';
+function specOf(cat,p){
+  switch(cat){
+    case 'cpu':return `${sockN(p.s)} · ${p.b} · ~${p.w} Вт${p.ig?' · iGPU':''}`;
+    case 'board':return `${sockN(p.s)} · ${p.m} · ${p.f||'mATX'}`;
+    case 'ram':return `${p.m} · ${p.gb} ГБ`;
+    case 'gpu':return `${p.b} · ${p.v} ГБ · ~${p.w} Вт${p.used?' · б/у':''}`;
+    case 'ssd':return `NVMe · ${gbN(p.gb)}`;
+    case 'psu':return `${p.w} Вт · ${/Gold/.test(p.n)?'80+ Gold':'80+ Bronze'}`;
+    default:return p.y||'';
+  }
+}
+const CATALOG=[];
+[['cpu',CPU],['board',BOARD],['ram',RAM],['gpu',GPU],['ssd',SSD],['psu',PSU],['case',CASE],['cool',COOL]].forEach(([cat,arr])=>arr.forEach(p=>{
+  const sp=specOf(cat,p);
+  CATALOG.push({cat,p,sp,hay:(CAT[cat][0]+' '+CAT[cat][1]+' '+p.n+' '+sp).toLowerCase()});
+}));
+
+/* ---------- Состояние ---------- */
+const S={region:null,budget:0,task:'games',used:false,cb:'any',gb:'any'};
+const C={q:'',cat:'all',sort:'asc',n:20};
+const LS='pcb_region';
+const reg=()=>REG[S.region];
+const snap=v=>{const r=reg();return Math.min(r.max,Math.max(r.min,Math.round(v/r.step)*r.step))};
+const P=(usd,r=reg())=>Math.round(usd*r.k/r.round)*r.round;
+const num=n=>n.toLocaleString('ru-RU');
+const fmt=n=>num(n)+'\u00A0'+reg().sym;
+const qOf=p=>(p.q||p.n).replace(/\s*\(.*?\)/g,'').replace(/ГБ/g,'GB').replace(/ТБ/g,'TB').replace(/Вт/g,'W').replace(/\s+/g,' ').trim();
+const store={get(){try{return localStorage.getItem(LS)}catch(e){return null}},set(v){try{localStorage.setItem(LS,v)}catch(e){}}};
+
+/* ---------- Подбор сборки ---------- */
+const pickPSU=(c,g)=>{const need=(c.w+g.w+90)*1.3;return PSU.find(p=>p.w>=need)||PSU[PSU.length-1]};
+const pickCase=(c,g,b,bu)=>{
+  let i=(g.w>=240||c.p>=170)?2:bu>=1600?3:bu>=700?1:0;
+  if(b.f==='ATX'&&i===0)i=1;
+  return CASE[i];
+};
+const pickCool=c=>c.box?null:(c.w>=170?COOL[2]:c.w>=100?COOL[1]:COOL[0]);
+const plat=c=>c.s==='AM5'?1.03:1;
+function score(task,c,g,r,s){
+  const sp=s.sp?1.012:1;
+  if(task==='games'){
+    let l=0;FG.forEach(f=>l+=f.w*Math.log(fpsOne(f,c,g)));
+    return Math.exp(l)*(r.gb>=32?1.025:1)*(s.gb>=1000?1.01:1)*plat(c)*sp;
+  }
+  if(task==='creative')return Math.pow(c.p,.45)*Math.pow(g.gs+g.v*5,.3)*Math.pow(r.gb,.25)*Math.pow(s.gb,.08)*plat(c)*sp;
+  return Math.pow(c.p,.4)*Math.pow(c.g,.1)*Math.pow(r.gb,.3)*Math.pow(s.gb,.15)*Math.pow(g.gs+30,.05)*plat(c)*sp;
+}
+function configure(){
+  const r=reg(),budget=S.budget,bu=budget/r.k;
+  const cl=CPU.filter(c=>S.cb==='any'||c.b===S.cb);
+  const gl=GPU.filter(g=>!!g.used===S.used&&(S.gb==='any'||g.b===S.gb));
+  let best=null,cheap=null;
+  for(const c of cl)for(const b of BOARD){
+    if(b.s!==c.s||b.t<c.t)continue;
+    for(const rm of RAM){
+      if(rm.m!==b.m)continue;
+      const gs=(c.ig&&S.gb==='any')?[NOGPU,...gl]:gl;
+      for(const g of gs){
+        const psu=pickPSU(c,g),cs=pickCase(c,g,b,bu),cl2=pickCool(c);
+        const base=P(c.u,r)+P(b.u,r)+P(rm.u,r)+P(g.u,r)+P(psu.u,r)+P(cs.u,r)+(cl2?P(cl2.u,r):0);
+        for(const s of SSD){
+          const total=base+P(s.u,r);
+          const cand={c,b,rm,g,s,psu,cs,cl:cl2,total};
+          if(!cheap||total<cheap.total)cheap=cand;
+          if(total>budget)continue;
+          const sc=score(S.task,c,g,rm,s)*Math.pow(total/budget,.4);
+          if(!best||sc>best.sc||(sc===best.sc&&total<best.total)){cand.sc=sc;best=cand}
+        }
+      }
+    }
+  }
+  return best?Object.assign(best,{over:false}):Object.assign(cheap,{over:true});
+}
+
+/* ---------- Ссылки на магазины ---------- */
+function links(p,usedPart){
+  const sh=SHOP[S.region],q=qOf(p);
+  const nw={u:sh.n.url(q),l:sh.n.name},us={u:sh.u.url(q),l:sh.u.name};
+  const more=(sh.more||[]).map(m=>({u:m.url(q),l:m.name}));
+  return usedPart?{main:us,alt:nw,altT:'Новое',more:[]}:{main:nw,alt:us,altT:'Б/У',more};
+}
+const lnk=(x,c,t)=>`<a class="${c}" href="${esc(x.u)}" target="_blank" rel="noopener noreferrer">${t}</a>`;
+
+/* ---------- Рендер ---------- */
+function rowHTML(cat,p,text,opt={}){
+  const lab=CAT[cat][1];
+  let price,act='';
+  if(opt.free)price='<span style="color:var(--dm);font:400 13px Inter,sans-serif">В комплекте</span>';
+  else{
+    price=esc(fmt(P(p.u)));
+    const L=links(p,!!opt.used);
+    act=lnk(L.main,'b',`Найти цену <em>${esc(L.main.l)}</em>`)+lnk(L.alt,'lk',`${esc(L.altT)} · ${esc(L.alt.l)}`)+
+      (L.more.length?`<div class="mr">Ещё:${L.more.map(m=>lnk(m,'lk',esc(m.l))).join('')}</div>`:'');
+  }
+  return `<li class="tr"><span class="tag">${lab}</span><div class="nm"><b>${esc(p.n)}</b>${opt.used?'<span class="ub">Б/У</span>':''}<p>${esc(text)}</p></div><div class="pr">${price}</div><div class="ac">${act}</div></li>`;
+}
+
+function render(){
+  const r=reg(),b=configure(),sl=$('#budget');
+  sl.min=r.min;sl.max=r.max;sl.step=r.step;sl.value=S.budget;
+  sl.style.setProperty('--pct',((S.budget-r.min)/(r.max-r.min)*100)+'%');
+  $('#budgetVal').textContent=fmt(S.budget);
+  $('#budgetUsd').textContent=S.region==='CIS'?'':'≈ $'+num(Math.round(S.budget/r.k));
+  $('#bMin').textContent=fmt(r.min);$('#bMax').textContent=fmt(r.max);
+  $$('#presets button').forEach(el=>{
+    const v=snap(+el.dataset.usd*r.k);
+    el.querySelector('span').textContent=fmt(v);
+    el.setAttribute('aria-pressed',String(v===S.budget));
+  });
+  $$('#tasks .rd').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.task===S.task)));
+  $$('#cbSeg button').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.v===S.cb)));
+  $$('#gbSeg button').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.v===S.gb)));
+  $('#usedSw').setAttribute('aria-checked',String(S.used));
+  const sh=SHOP[S.region];
+  $('#usedHint').textContent=S.used?`Поиск б/у: ${sh.u.name}`:'';
+  $('#usedCheck').hidden=!S.used;
+  $('#regionSel').value=S.region;
+  $('#subline').textContent=`${TASK_NAME[S.task]} · ${r.cur}`;
+
+  const rest=S.budget-b.total,pct=Math.min(100,Math.round(b.total/S.budget*100));
+  const peak=Math.round((b.c.w+b.g.w+90)/10)*10;
+  const platform=sockN(b.c.s)+' · '+b.b.m;
+  $('#summary').innerHTML=(b.over?`<div class="wr">Бюджета не хватает даже на минимальную сборку. Показана самая дешёвая конфигурация, увеличьте бюджет минимум на <b>${esc(fmt(b.total-S.budget))}</b>.</div>`:'')+
+   `<div class="sm"><div><div class="k">Итого</div><div class="v">${esc(fmt(b.total))}</div></div><div><div class="k" style="text-align:right">${b.over?'Не хватает':'Остаток'}</div><div class="v2" style="color:${b.over?'var(--bd)':'var(--ok)'}">${esc(fmt(Math.abs(rest)))}</div></div></div>
+    <div class="pg"><i style="width:${b.over?100:pct}%"></i></div>
+    <div class="cps"><span class="cp">${esc(platform)}</span><span class="cp">БП ${b.psu.w} Вт</span><span class="cp">${b.over?'>100':pct}% бюджета</span>${S.used?'<span class="cp">б/у видеокарта</span>':''}</div>`;
+
+  const psuWhy=`Запас по мощности: пик сборки около ${peak} Вт. ${/Gold/.test(b.psu.n)?'80+ Gold: тихий, экономичный и надёжный.':'80+ Bronze: проверенный бюджетный вариант.'}`;
+  $('#parts').innerHTML=[
+    rowHTML('cpu',b.c,b.c.y),
+    rowHTML('board',b.b,b.b.y),
+    rowHTML('ram',b.rm,b.rm.y),
+    b.g.id==='igpu'?rowHTML('gpu',b.g,b.g.y,{free:1}):rowHTML('gpu',b.g,b.g.y,{used:!!b.g.used}),
+    rowHTML('ssd',b.s,b.s.y),
+    rowHTML('psu',b.psu,psuWhy),
+    rowHTML('case',b.cs,b.cs.y),
+    b.cl?rowHTML('cool',b.cl,b.cl.y):rowHTML('cool',{n:'Боксовый кулер (в комплекте)',u:0},'Идёт в комплекте с процессором: тратиться отдельно не нужно.',{free:1})
+  ].join('');
+
+  FG.forEach(f=>{
+    const v=Math.round(fpsOne(f,b.c,b.g));
+    $('#fv-'+f.id).textContent='≈ '+v+' FPS';
+    const bar=$('#fb-'+f.id);
+    bar.style.width=Math.min(100,v/f.max*100)+'%';
+    bar.className='bar '+(v<30?'bar-r':v<60?'bar-y':'bar-g');
+  });
+  $('#fpsNote').textContent=b.g.id==='igpu'
+    ?'Со встроенной графикой комфортны только лёгкие киберспортивные игры. Для тяжёлых проектов добавьте видеокарту.'
+    :'Расчётная оценка без трассировки лучей и апскейлеров. В реальных играх результат зависит от сцены, драйверов и версии игры.';
+  renderCat();
+}
+
+function renderCat(){
+  const toks=C.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const a=CATALOG.filter(x=>(C.cat==='all'||x.cat===C.cat)&&toks.every(t=>x.hay.includes(t)))
+    .sort((m,n)=>C.sort==='asc'?m.p.u-n.p.u:n.p.u-m.p.u);
+  const shown=a.slice(0,C.n);
+  $('#catCount').textContent=`Найдено: ${a.length}`;
+  $('#catList').innerHTML=shown.length?shown.map(x=>rowHTML(x.cat,x.p,x.sp,{used:!!x.p.used})).join(''):'<li class="empty">Ничего не найдено. Попробуйте другой запрос или тип.</li>';
+  $('#catMoreW').hidden=a.length<=C.n;
+  $$('#catChips button').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.c===C.cat)));
+}
+
+/* ---------- Инициализация DOM ---------- */
+function buildStatic(){
+  $('#regionSel').innerHTML=Object.entries(REG).map(([k,v])=>`<option value="${k}">${esc(v.name)} · ${v.cur}</option>`).join('');
+  $('#presets').innerHTML=PRE.map(p=>`<button type="button" data-usd="${p[1]}" aria-pressed="false"><b>${esc(p[0])}</b><span></span></button>`).join('');
+  $('#tasks').innerHTML=TASKS.map(t=>`<button type="button" class="rd" data-task="${t[0]}" aria-pressed="false"><i></i><div><b>${esc(t[1])}</b><span>${esc(t[2])}</span></div></button>`).join('');
+  ['cb','gb'].forEach(k=>$('#'+k+'Seg').innerHTML=SEGS[k].map(o=>`<button type="button" data-v="${o[0]}" aria-pressed="false">${esc(o[1])}</button>`).join(''));
+  $('#fpsList').innerHTML=FG.map(f=>`<div class="fp"><span>${f.n}</span><div class="tk"><div id="fb-${f.id}" class="bar bar-g" style="width:0"></div></div><span id="fv-${f.id}" class="mono">—</span></div>`).join('');
+  $('#mOpts').innerHTML=Object.entries(REG).map(([k,v])=>`<button type="button" class="opt" data-r="${k}"><b>${esc(v.name)}</b><span>${v.cur}</span></button>`).join('');
+  $('#catChips').innerHTML=[['all','Всё'],...Object.entries(CAT).map(([k,v])=>[k,v[0]])].map(o=>`<button type="button" data-c="${o[0]}" aria-pressed="false">${esc(o[1])}</button>`).join('');
+}
+
+function setRegion(r,localBudget){
+  const prev=(S.region&&S.budget)?S.budget/REG[S.region].k:null;
+  S.region=r;
+  S.budget=snap(localBudget>0?localBudget:(prev!=null?prev*REG[r].k:700*REG[r].k));
+}
+function guessRegion(){
+  let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+  if(/Minsk/.test(tz))return'BY';
+  if(/Almaty|Aqtau|Aqtobe|Oral|Qostanay|Qyzylorda|Atyrau/.test(tz))return'KZ';
+  if(/Moscow|Kaliningrad|Samara|Yekaterinburg|Omsk|Novosibirsk|Krasnoyarsk|Irkutsk|Yakutsk|Vladivostok|Kamchatka/.test(tz))return'RU';
+  return null;
+}
+function showModal(show,rec){
+  const m=$('#modal');
+  m.classList.toggle('open',show);
+  document.body.style.overflow=show?'hidden':'';
+  if(show){
+    $$('.opt',m).forEach(o=>o.classList.toggle('rec',o.dataset.r===rec));
+    const f=$('.opt.rec',m)||$('.opt',m);f&&f.focus();
+  }
+}
+
+let raf=0;
+const queue=()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;render()})};
+
+function toast(msg){
+  const t=$('#toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2400);
+}
+async function copyText(t){
+  try{await navigator.clipboard.writeText(t);return true}
+  catch(e){
+    const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(a);a.select();let ok=false;
+    try{ok=document.execCommand('copy')}catch(_){}
+    a.remove();return ok;
+  }
+}
+function shareURL(){
+  const base=location.href.split(/[?#]/)[0];
+  const q=new URLSearchParams({region:S.region,budget:String(S.budget),task:S.task,used:S.used?'1':'0',cpu:S.cb,gpu:S.gb});
+  return base+'?'+q.toString();
+}
+
+/* ---------- События ---------- */
+function bind(){
+  $('#budget').addEventListener('input',e=>{S.budget=snap(+e.target.value);queue()});
+  $('#presets').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.budget=snap(+b.dataset.usd*reg().k);render()});
+  $('#tasks').addEventListener('click',e=>{const b=e.target.closest('.rd');if(!b)return;S.task=b.dataset.task;render()});
+  $('#cbSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.cb=b.dataset.v;render()});
+  $('#gbSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.gb=b.dataset.v;render()});
+  $('#usedSw').addEventListener('click',()=>{S.used=!S.used;render();if(S.used)$('#usedCheck').open=true});
+  $('#regionSel').addEventListener('change',e=>{setRegion(e.target.value);store.set(S.region);render()});
+  $('#mOpts').addEventListener('click',e=>{
+    const b=e.target.closest('.opt');if(!b)return;
+    setRegion(b.dataset.r);store.set(S.region);showModal(false);render();
+  });
+  $('#share').addEventListener('click',async()=>{
+    const url=shareURL();
+    try{history.replaceState(null,'',url)}catch(e){}
+    const ok=await copyText(url);
+    toast(ok?'Ссылка скопирована!':'Не удалось скопировать: возьмите ссылку из адресной строки');
+  });
+  $('#usedCheck').addEventListener('change',()=>{
+    const a=$$('#usedCheck input');
+    $('#chkCount').textContent=a.filter(i=>i.checked).length+' из '+a.length;
+  });
+  $('#modal').addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const o=$$('.opt',$('#modal')),i=o.indexOf(document.activeElement);
+    e.preventDefault();
+    o[(i+(e.shiftKey?-1:1)+o.length)%o.length].focus();
+  });
+  $('#catQ').addEventListener('input',e=>{C.q=e.target.value;C.n=20;renderCat()});
+  $('#catSort').addEventListener('change',e=>{C.sort=e.target.value;renderCat()});
+  $('#catChips').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;C.cat=b.dataset.c;C.n=20;renderCat()});
+  $('#catMore').addEventListener('click',()=>{C.n+=20;renderCat()});
+}
+
+/* ---------- Старт ---------- */
+function init(){
+  buildStatic();
+  bind();
+  const q=new URLSearchParams(location.search);
+  const has=(o,k)=>!!k&&Object.prototype.hasOwnProperty.call(o,k);
+  const qr=q.get('region'),sv=store.get();
+  let r,needModal=false;
+  if(has(REG,qr))r=qr;
+  else if(has(REG,sv))r=sv;
+  else{r=guessRegion()||'BY';needModal=true}
+  const qb=parseFloat(q.get('budget'));
+  setRegion(r,qb>0?qb:0);
+  const t=q.get('task');
+  if(has(TASK_NAME,t))S.task=t;
+  S.used=q.get('used')==='1';
+  const cp=q.get('cpu'),gp=q.get('gpu');
+  if(SEGS.cb.some(o=>o[0]===cp))S.cb=cp;
+  if(SEGS.gb.some(o=>o[0]===gp))S.gb=gp;
+  render();
+  if(needModal)showModal(true,guessRegion());
+}
+init();
+})();
+</script>
+</body>
+</html>
